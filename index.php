@@ -14,9 +14,18 @@
 	$result = mysql_query("SELECT * FROM userinfo WHERE rollno = '{$rollnum}' AND password = '{$hashed_passwd}'", $connection);
       if(mysql_num_rows($result)==1){
 	$user = mysql_fetch_array($result);
-	$_SESSION['rollnum']=$user['rollno'];
-	$_SESSION['user_id']=$user['id'];
-	redirectTo("afterlogin.php");
+	$_SESSION['rollnum'] = $user['rollno'];
+	$_SESSION['user_id'] = $user['id'];
+	$_SESSION['count'] = $user['count']+1;
+	$result = mysql_query("UPDATE  userinfo SET count = '{$_SESSION['count']}' WHERE id = '{$_SESSION['user_id']}'",$connection);
+	
+	if(!result)
+	  die("Mysql_query error ".mysql_error());
+	  
+	if($_SESSION['count'] == 1)
+	  redirectTo("updateprofile.php");
+	else
+	  redirectTo("afterlogin.php");
       }
     else{
 	echo "<span style = 'color:red'><b>Invalid rollnum or Password. Please make sure that you you use your LDAP password???</b></span>";   

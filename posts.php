@@ -19,6 +19,8 @@
     mysql_select_db($DATABASE, $connection);
     if(!$connection)
       die("Mysql connection with the database failed".mysql_error());
+      
+      
     if(isset($_GET['myposts']) && $_GET['myposts'] == 1){
       echo "<h3>This page shows posts only from you</h3>";
       echo "<h3>Insted to see posts from all users <a href = '/buynsell/posts.php?allposts=1'> Click Here</a></h3>";
@@ -41,7 +43,7 @@
     else if(isset($_GET['allposts']) && $_GET['allposts'] == 1){
     
       echo "<h3>This page shows posts from all the users</h3>";
-      
+      echo "<h3>Insted to see posts only from you <a href = '/buynsell/posts.php?myposts=1'> Click Here</a></h3>";
       $result = mysql_query("SELECT * FROM items ORDER BY timestamp DESC",$connection);
       if(!$result)
 	die("Mysql query error".mysql_error());

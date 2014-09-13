@@ -15,13 +15,8 @@
   mysql_select_db($DATABASE,$connection);
   if(!$connection)
     die("Mysql connection with the database failed".mysql_error());
-    
-  if(!isset($_SESSION['rollnum'])){
-    header("Location: /buynsell/index.php?exp=1");
-    exit();
-    
-  }
-  else if (isset($_POST['post'])){
+   
+    if (isset($_POST['post'])){
     
     $result = mysql_query("INSERT INTO items(item_name,price,description,reason,user_id) VALUE('{$_POST['item_name']}', '{$_POST['price']}', '{$_POST['description']}', '{$_POST['reason']}','{$_SESSION['user_id']}')", $connection);
 
@@ -63,6 +58,7 @@
     
     }
     echo "<span style= 'color:green'><b>Your posts has been successfully posted. Check your posts or All posts to have a look at it</b></span>";
+    mysql_close($connection);
   }
   
  ?>
@@ -72,6 +68,7 @@
     <head>
 	<link href="stylesheets/css_afterlogin.css" rel = "stylesheet" type = "text/css"/>
 	<title>BUY&SELL@IITM</title>	
+	<script src = "./ckeditor/ckeditor.js"></script>
     </head>
     <body>
 	<h1>
@@ -100,7 +97,7 @@
 	</h4>
 	<p>We thank you for joining our project of making the Life At IITM more peaceful!!!</p>
 	<p>You have some unused products and would like to sell them It's simple now.  Post Below:</p>
-	
+	<a href = "updateprofile.php"> Update Myproile</a><br />
 	<a href = "posts.php?myposts=1">My Posts</a><br />
 	<a href = "posts.php?allposts=1">All Posts</a><br />
 	
@@ -130,11 +127,13 @@
 	    <p>
 		Brief Description:
 	    </p>
-	    <textarea rows = 10 cols = 100 name = "description"></textarea>
+	    <textarea class = "ckeditor" id = "editor1" name = "description"></textarea>
+	    <script> CKEDITOR.replace('editor1');</script>
 	    <p>
 	      Specific reason for selling your product:
 	    </p>
-	    <textarea rows =10 cols = 100 name = "reason"></textarea>
+	    <textarea class = "ckeditor" id = "editor2" name = "reason"></textarea>
+	    <script> CKEDITOR.replace('editor2');</script>
 	    <br />
 	    <input type = "submit" name = "post" value = "post"></input>
 	</form>
