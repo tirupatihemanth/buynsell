@@ -22,3 +22,6 @@ TARGET FEATURES:
 
 22/10/2014
       In the latest commit I have done the cookie setting part and catergory wise segregation of all the products and added features like public commenting as well as private messaging between the buyers and seller will develop on these in the later versions :)
+
+23/10/2014
+     In the latest commit I have added a new feature for the users to upload pictures of their products with size less than 10MB and one among the formats jpeg,jpg,png :)
