@@ -19,3 +19,6 @@ TARGET FEATURES:
 	10.An android app to track the status of their products whether they have got a message from some user or not and most of the features available in the website has to be incorporated into the app. This app is very important as most of the users rely on mobile phones :)
 	
 	These are the target features I thought of. We can incorporate all these features If I remember somemore features I will append them. Because Only with all these features we can be comparable to the facebook page BUYNSELL @ IITM :)
+
+22/10/2014
+      In the latest commit I have done the cookie setting part and catergory wise segregation of all the products and added features like public commenting as well as private messaging between the buyers and seller will develop on these in the later versions :)
