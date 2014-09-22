@@ -9,51 +9,61 @@
 
 
 <?php
-
+	
+	$error = 0;
     $connection = mysql_connect($WEBHOST, $USER, $PASSWORD);
     mysql_select_db($DATABASE,$connection);
     
     if (isset($_POST['post'])){
     
-    $result = mysql_query("INSERT INTO items(item_name,price,description,reason,user_id) VALUE('{$_POST['item_name']}', '{$_POST['price']}', '{$_POST['description']}', '{$_POST['reason']}','{$_SESSION['user_id']}')", $connection);
+    include "upload_file.php";
+    if($error == 0){
+	    $result = mysql_query("INSERT INTO items(item_name,price,description,reason,user_id) VALUE('{$_POST['item_name']}', '{$_POST['price']}', '{$_POST['description']}', '{$_POST['reason']}','{$_SESSION['user_id']}')", $connection);
 
-    if(!$result)
-        die("mysql_query error has occured".mysql_error());
+	    if(!$result)
+	        die("mysql_query error has occured".mysql_error());
 
-    $result = mysql_query("SELECT item_id,user_id FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC ");
-    
-    if(!$result)
-        die("mysql_query error has occured".mysql_error());
-    //echo mysql_num_rows($result);
-    $result = mysql_fetch_array($result);
-    //print_r($result);
-    $item_id = $result['item_id'];
-    //echo $item_id;
-    if(isset($_POST['category'])){
-      
-      for($i=0;$i<8;$i++){
-	if(isset($_POST['category'][$i])){
-	//echo $_POST['category'][$i];
-	$result = mysql_query("SELECT * FROM tags WHERE tag_name = '{$_POST['category'][$i]}'");
-	
-	if(!$result)
-	  die("mysql_query error has occured".mysql_error());
-	  
-	if(mysql_num_rows($result)==1){
-	  $result = mysql_fetch_array($result);
-	  $tag_id = $result['tag_id'];
+	    $result = mysql_query("SELECT item_id,user_id FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC ");
+	    
+	    if(!$result)
+	        die("mysql_query error has occured".mysql_error());
+	    //echo mysql_num_rows($result);
+	    $result = mysql_fetch_array($result);
+	    //print_r($result);
+	    $item_id = $result['item_id'];
+	    //echo $item_id;
+	    
+	    //$_FILES["photos"]["tmp_name"] = "".$_FILES["photos"]["tmp_name"].$_SESSION['user_id'].$item_id;
+	    //echo "$_FILES['photos']['tmp_name']";
+		move_uploaded_file($_FILES["photos"]["tmp_name"],"photos_items/".$_SESSION['user_id'].$item_id.$_FILES["photos"]["name"]);
+
+	    if(isset($_POST['category'])){
+	      
+	      for($i=0;$i<8;$i++){
+		if(isset($_POST['category'][$i])){
+		//echo $_POST['category'][$i];
+		$result = mysql_query("SELECT * FROM tags WHERE tag_name = '{$_POST['category'][$i]}'");
+		
+		if(!$result)
+		  die("mysql_query error has occured".mysql_error());
+		  
+		if(mysql_num_rows($result)==1){
+		  $result = mysql_fetch_array($result);
+		  $tag_id = $result['tag_id'];
+		}
+		else
+		  die("mysql_query error has occured".mysql_error());
+		
+		$result = mysql_query("INSERT INTO item_tags(item_id,tag_id) value('{$item_id}', '{$tag_id}')", $connection);
+		if(!$result)
+		  die("mysql_query error has occured".mysql_error());
+	      
+		}
+	      }
+	    
+	    }
 	}
-	else
-	  die("mysql_query error has occured".mysql_error());
-	
-	$result = mysql_query("INSERT INTO item_tags(item_id,tag_id) value('{$item_id}', '{$tag_id}')", $connection);
-	if(!$result)
-	  die("mysql_query error has occured".mysql_error());
-      
-	}
-      }
-    
-    }
+    if($error == 0)
     echo "<span style= 'color:green'><b>Your posts has been successfully posted. Check your posts or All posts to have a look at it</b></span>";
     mysql_close($connection);
   }
@@ -79,7 +89,7 @@
       <p>
 	Try to be precise in giving description and reasons for selling. Please choose the appropriate tags so that we can show the most relavant information to the buyers
       </p>
-      <form method="post" action = "newpost.php">
+      <form method="post" action = "newpost.php" enctype = "multipart/form-data">
 	    <p>
 		Enter the name of the object you would like to sell precisely below:
 	    </p>
@@ -102,6 +112,8 @@
 	      <input type = "checkbox" name = "category[]" value = "eatables">Eatables</input>
 	      <input type = "checkbox" name = "category[]" value = "others">others</input>
 	    </p>
+	    <p>Upload genuine photos of your product</p>
+	    <input type = "file" name = "photos"></input>
 	    <p>
 		Brief Description:
 	    </p>
