@@ -11,7 +11,7 @@
 	    $hashed_pwd = sha1($passwd1);
 	}
 	else{
-	    
+	    header("Location: /index.php?err
 	}
     }
 ?>

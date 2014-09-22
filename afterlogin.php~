@@ -34,7 +34,7 @@
 	<h1>
 	    <?php
 	      $connection = mysql_connect($WEBHOST,$USER,$PASSWORD);
-	      include "header.php";
+	      
 	      if(!$connection)
 		die("Mysql connection with the dtatabase failed".mysql_error());
 		

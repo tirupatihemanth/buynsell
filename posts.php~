@@ -26,14 +26,14 @@
     
       echo"<style> ul#tagsmenu li {display : inline; padding:5px;}</style> 
       <ul id = 'tagsmenu'>
-	<li><a href = 'posts.php?tag_id=1&myposts=1'>mobiles</a></li>
-	<li><a href = 'posts.php?tag_id=2&myposts=1'>tablets</a></li>
-	<li><a href = 'posts.php?tag_id=3&myposts=1'>laptops</a></li>
-	<li><a href = 'posts.php?tag_id=4&myposts=1'>electronic devices</a></li>
-	<li><a href = 'posts.php?tag_id=5&myposts=1'>cycles</a></li>
-	<li><a href = 'posts.php?tag_id=6&myposts=1'>academics</a></li>
-	<li><a href = 'posts.php?tag_id=8&myposts=1'>eatables</a></li>
-	<li><a href = 'posts.php?tag_id=9&myposts=1'>others</a></li>
+	<li><a href = 'posts.php?tag=1&myposts=1'>mobiles</a></li>
+	<li><a href = 'posts.php?tag=2&myposts=1'>tablets</a></li>
+	<li><a href = 'posts.php?tag=3&myposts=1'>laptops</a></li>
+	<li><a href = 'posts.php?tag=4&myposts=1'>electronic devices</a></li>
+	<li><a href = 'posts.php?tag=5&myposts=1'>cycles</a></li>
+	<li><a href = 'posts.php?tag=6&myposts=1'>academics</a></li>
+	<li><a href = 'posts.php?tag=8&myposts=1'>eatables</a></li>
+	<li><a href = 'posts.php?tag=9&myposts=1'>others</a></li>
       </ul>";
     
       echo "<h3>This page shows posts only from you</h3>";
@@ -48,6 +48,7 @@
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
 	    $array = mysql_fetch_array($result_items);
+	    
 	  echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span style = 'color:green'>Item Name: ".$array['item_name']."</span><br />";
 	  echo "<span>Price as Specified By the User: ".$array['price']."</span><br />";

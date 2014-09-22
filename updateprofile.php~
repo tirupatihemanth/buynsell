@@ -10,7 +10,6 @@
 ?> 
 
 <?php
-    include "header.php";
     $html_auto_fill = array();
     $passwordmismatch = 0;
     $passworderror = 0;
@@ -101,6 +100,9 @@
 	  echo "<span style = 'color:green'><b> Seems Like You Are logging in for the first time BUYNSELL@IITM WELCOMES YOU :)<br /><br /></b></span>";
       }
     ?>
+    
+    <a href = "afterlogin.php">My Home Page</a>
+    
     <form method = "post" action = "updateprofile.php">
       
 	<?php echo "<p>Enter Your Full Name: <input type = 'text' value = '".$html_auto_fill[0]."' name = 'fullname'></input></p>"; ?>
