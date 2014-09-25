@@ -6,10 +6,12 @@
     </title>
   </head>
   <body>
+
   <?php
     session_start();
+	include "header.php";
     include "db.php";
-    include "header.php";
+	echo "<div class='col-xs-8 col-xs-offset-2'";
 	include "carousal.php";
 	echo"<br><br><br>";
     if(!isset($_SESSION['user_id'])){
@@ -35,7 +37,7 @@
 	<li><a href = 'posts.php?tag_id=6&myposts=1'>academics</a></li>
 	<li><a href = 'posts.php?tag_id=8&myposts=1'>eatables</a></li>
 	<li><a href = 'posts.php?tag_id=9&myposts=1'>others</a></li>
-      </ul>";
+      </ul>	";
     
       echo "<h3>This page shows posts only from you</h3>";
       
@@ -128,11 +130,18 @@
 	
       }
       else{
-	$result = mysql_query("SELECT * FROM items ORDER BY timestamp DESC",$connection);
-	if(!$result)
-	  die("Mysql query error".mysql_error());
-	for($i=0;$i<mysql_num_rows($result);$i++){
-	  $array = mysql_fetch_array($result);
+$con=mysqli_connect("localhost","root","","buynsell");
+// Check connection
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+$result = mysqli_query($con,"SELECT * FROM items") or die(mysqli_error($con));
+
+	for($i=0;$i<mysqli_num_rows($result);$i++){
+		echo "here";
+	  $array = mysqli_fetch_array($result);
+	  echo "here";
 	  echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span style = 'color:green'>Item Name: ".$array['item_name']."</span><br />";
 	  echo "<span>Price as Specified By the User: ".$array['price']."</span><br />";
@@ -140,10 +149,10 @@
 	  echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br />";
 	  echo "<span style = 'color:blue'><b>User Details:<br /></b></span>";
 	  
-	  $userdetails = mysql_query("SELECT * FROM userinfo WHERE id = '{$array['user_id']}'");
+	  $userdetails = mysqli_query($connection,"SELECT * FROM userinfo WHERE id = '{$array['user_id']}'");
 	  if(!$userdetails)
 	    die("Mysql error in query".mysql_error());
-	  $userarray = mysql_fetch_array($userdetails);
+	  $userarray = mysqli_fetch_array($userdetails);
 	  echo "<span><span color: green>User Name: </span><span>".$userarray['fullname']."</span><br />";
 	  echo "<span><span color: green>RollNumber: </span><span>".$userarray['rollno']."</span><br />";
 	  echo "<span><span color: green>Hostel: </span><span>".$userarray['hostel']."</span><br />";
@@ -157,5 +166,6 @@
     }
 
   ?>
+</div>
   </body>
 </html>

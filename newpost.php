@@ -76,9 +76,11 @@
     <script src = "./ckeditor/ckeditor.js"></script>
   </head>
   <body>
+
     <?php
       include "header.php";
     ?>
+	<div class="col-xs-8 col-xs-offset-2">
     <h1>
       New Post
     </h1>
@@ -128,5 +130,6 @@
 	    <input type = "submit" name = "post" value = "post"></input>
 	</form>
     </p>
+	</div>
   </body>
 </html> 
