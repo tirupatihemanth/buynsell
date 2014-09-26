@@ -11,6 +11,7 @@
     include "db.php";
     include "header.php";
 	include "carousal.php";
+	echo"<br><br><br>";
     if(!isset($_SESSION['user_id'])){
       header("Location: /buynsell/index.php?exp=1");
       exit();
