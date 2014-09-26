@@ -1,6 +1,8 @@
 <?php
 echo "
   <style>
+  ul#header{
+       }      
    ul#header li{
     font-size:20px;
     display : inline;
@@ -9,7 +11,8 @@ echo "
     background-color: blue;
     color:white;
     padding:10px 20px;
-    border-radius: 4px 4px 0 0;
+	border:1px solid black;
+    border-radius: 0px 0px 5px 5px;
    }
    ul#header li a:hover{
     background-color: green;

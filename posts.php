@@ -10,21 +10,21 @@
     session_start();
     include "db.php";
     include "header.php";
-
+	include "carousal.php";
     if(!isset($_SESSION['user_id'])){
       header("Location: /buynsell/index.php?exp=1");
       exit();
     }
     
-    $connection = mysql_connect($WEBHOST, $USER, $PASSWORD);
-    mysql_select_db($DATABASE, $connection);
+    $connection = mysqli_connect($WEBHOST, $USER, $PASSWORD,$DATABASE);
+    
     if(!$connection)
       die("Mysql connection with the database failed".mysql_error());
       
       
     if(isset($_GET['myposts']) && $_GET['myposts'] == 1){
     
-      echo"<style> ul#tagsmenu li {display : inline; padding:5px;}</style> 
+      echo"<style>ul#tagsmenu li {display : inline; padding:5px;}</style> 
       <ul id = 'tagsmenu'>
 	<li><a href = 'posts.php?tag_id=1&myposts=1'>mobiles</a></li>
 	<li><a href = 'posts.php?tag_id=2&myposts=1'>tablets</a></li>
@@ -95,15 +95,15 @@
       echo "<h3>This page shows posts from all the users</h3>";
       if(isset($_GET['tag_id'])){
       
-	$result_items = mysql_query("SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC",$connection);
+	$result_items = mysqli_query($connection,"SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC");
 	if(!$result_items)
 	  die("Mysql query error has occured ".mysql_error());
-	  $result_items_rows = mysql_num_rows($result_items);
+	  $result_items_rows = mysqli_num_rows($result_items);
 	if( $result_items_rows == 0)
 	  echo "<span>Nothing to see here move along :)</span>";
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
-	    $array = mysql_fetch_array($result_items);
+	    $array = mysqli_fetch_array($result_items);
 	  echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span style = 'color:green'>Item Name: ".$array['item_name']."</span><br />";
 	  echo "<span>Price as Specified By the User: ".$array['price']."</span><br />";
@@ -111,10 +111,10 @@
 	  echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br />";
 	  echo "<span style = 'color:blue'><b>User Details:<br /></b></span>";
 	  
-	  $userdetails = mysql_query("SELECT * FROM userinfo WHERE id = '{$array['user_id']}'");
+	  $userdetails = mysqli_query($connection,"SELECT * FROM userinfo WHERE id = '{$array['user_id']}'");
 	  if(!$userdetails)
 	    die("Mysql error in query".mysql_error());
-	  $userarray = mysql_fetch_array($userdetails);
+	  $userarray = mysqli_fetch_array($userdetails);
 	  echo "<span><span color: green>User Name: </span><span>".$userarray['fullname']."</span><br />";
 	  echo "<span><span color: green>RollNumber: </span><span>".$userarray['rollno']."</span><br />";
 	  echo "<span><span color: green>Hostel: </span><span>".$userarray['hostel']."</span><br />";
