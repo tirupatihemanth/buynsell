@@ -40,41 +40,39 @@
       </ul>	";
     
       echo "<h3>This page shows posts only from you</h3>";
-      
       if(isset($_GET['tag_id'])){
-	$result_items = mysql_query("SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND items.user_id = '{$_SESSION['user_id']}' AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC",$connection);
+	$result_items = mysqli_query($connection,"SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND items.user_id = '{$_SESSION['user_id']}' AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC");
 	if(!$result_items)
 	  die("Mysql query error has occured ".mysql_error());
-	  $result_items_rows = mysql_num_rows($result_items);
+	  $result_items_rows = mysqli_num_rows($result_items);
 	if($result_items_rows == 0)
 	  echo "<span>Nothing to see here move along :)</span>";
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
-	    $array = mysql_fetch_array($result_items);
-	  echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
-	  echo "<span style = 'color:green'>Item Name: ".$array['item_name']."</span><br />";
-	  echo "<span>Price as Specified By the User: ".$array['price']."</span><br />";
-	  echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
-	  echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br />";
-	  include "comments.php";
-	  echo "<br /><br />---------------------------------------------------------------------------<br /><br />";
-	  
+	    $array = mysqli_fetch_array($result_items);
+echo "<div class='item col-xs-3'><div class='item_details'>";
+	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
+	  echo "<span class='text-center' style = 'color:green'><h4> ".$array['item_name']."</h4></span><br />";
+	  echo "<img class='center-block' src='pic.jpg' alt='404' height='200px' width='200px'>";
+	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span>";
+	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
+	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";
 	  }
 	}
       }
       else{
-	$result_items = mysql_query("SELECT * FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC",$connection);
+	$result_items = mysqli_query($connection,"SELECT * FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC");
 	if(!$result_items)
 	  die("Mysql query error".mysql_error());
-	for($i=0;$i<mysql_num_rows($result_items);$i++){
-	  $array = mysql_fetch_array($result_items);
-	  echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
-	  echo "<span style = 'color:green'>Item Name: ".$array['item_name']."</span><br />";
-	  echo "<span>Price as Specified By the User: ".$array['price']."</span><br />";
-	  echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
-	  echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br />";
-	  include "comments.php";
-	  echo "<br /><br />---------------------------------------------------------------------------<br /><br />";
+	for($i=0;$i<mysqli_num_rows($result_items);$i++){
+	  $array = mysqli_fetch_array($result_items);
+echo "<div class='item col-xs-3'><div class='item_details'>";
+	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
+	  echo "<span class='text-center' style = 'color:green'><h4> ".$array['item_name']."</h4></span><br />";
+	  echo "<img class='center-block' src='pic.jpg' alt='404' height='200px' width='200px'>";
+	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span>";
+	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
+	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";
 
 	}
       }
@@ -107,12 +105,14 @@
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
 	    $array = mysqli_fetch_array($result_items);
-	  echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
-	  echo "<span style = 'color:green'>Item Name: ".$array['item_name']."</span><br />";
-	  echo "<span>Price as Specified By the User: ".$array['price']."</span><br />";
-	  echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
-	  echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br />";
-	  echo "<span style = 'color:blue'><b>User Details:<br /></b></span>";
+echo "<div class='item col-xs-3'><div class='item_details'>";
+	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
+	  echo "<span class='text-center' style = 'color:green'><h4> ".$array['item_name']."</h4></span><br />";
+	  echo "<img class='center-block' src='pic.jpg' alt='404' height='200px' width='200px'>";
+	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span>";
+	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
+	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";
+	  echo "</div><div class='user_details'><span style = 'color:blue'><b>User Details:<br /></b></span>";
 	  
 	  $userdetails = mysqli_query($connection,"SELECT * FROM userinfo WHERE id = '{$array['user_id']}'");
 	  if(!$userdetails)
@@ -123,8 +123,9 @@
 	  echo "<span><span color: green>Hostel: </span><span>".$userarray['hostel']."</span><br />";
 	  echo "<span><span color: green>Room Number: </span><span>".$userarray['roomno']."</span><br />";
 	  echo "<span><span color: green>email id: </span><span>".$userarray['emailid']."</span><br />";
-	  include "comments.php";
-	  echo "<br /><br />---------------------------------------------------------------------------<br /><br />";
+	  //include "comments.php";
+	  echo "<br><br></div></div>";
+
 	  }
 	}
 	
@@ -139,15 +140,15 @@ if (mysqli_connect_errno()) {
 $result = mysqli_query($con,"SELECT * FROM items") or die(mysqli_error($con));
 
 	for($i=0;$i<mysqli_num_rows($result);$i++){
-		echo "here";
 	  $array = mysqli_fetch_array($result);
-	  echo "here";
-	  echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
-	  echo "<span style = 'color:green'>Item Name: ".$array['item_name']."</span><br />";
-	  echo "<span>Price as Specified By the User: ".$array['price']."</span><br />";
-	  echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
-	  echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br />";
-	  echo "<span style = 'color:blue'><b>User Details:<br /></b></span>";
+	  echo "<div class='item col-xs-3'><div class='item_details'>";
+	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
+	  echo "<span class='text-center' style = 'color:green'><h4> ".$array['item_name']."</h4></span><br />";
+	  echo "<img class='center-block' src='pic.jpg' alt='404' height='200px' width='200px'>";
+	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span>";
+	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
+	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";
+	  echo "</div><div class='user_details'><span style = 'color:blue'><b>User Details:<br /></b></span>";
 	  
 	  $userdetails = mysqli_query($connection,"SELECT * FROM userinfo WHERE id = '{$array['user_id']}'");
 	  if(!$userdetails)
@@ -158,8 +159,8 @@ $result = mysqli_query($con,"SELECT * FROM items") or die(mysqli_error($con));
 	  echo "<span><span color: green>Hostel: </span><span>".$userarray['hostel']."</span><br />";
 	  echo "<span><span color: green>Room Number: </span><span>".$userarray['roomno']."</span><br />";
 	  echo "<span><span color: green>email id: </span><span>".$userarray['emailid']."</span><br />";
-	  include "comments.php";
-	  echo "<br /><br />---------------------------------------------------------------------------<br /><br />";
+	  //include "comments.php";
+	  echo "<br><br></div></div>";
 
 	}
       }

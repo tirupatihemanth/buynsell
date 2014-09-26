@@ -39,9 +39,35 @@
 			}
 			.search{
 			padding-top:1rem;
+			color:white;
+			font-size:25px;
 			}
+			.item:hover{
+			box-shadow:2px 2px 2px #a0a0a0;
+			border:1px solid #a0a0a0;
+			}
+			.user_details{
+			display: none;
 			
+			}
+			.item{
+			height:300px;
+			}
+
 		</style>
+		<script>
+		$(document).ready(function(){
+		$('.item').hover(
+	 function(){
+	 $(this).find('.user_details').show();
+	 $(this).find('.item_details').hide();},
+	 function(){
+	 $('.user_details').hide();
+	 $('.item_details').show();}
+	 	 
+	 );
+	 })
+		</script>
 	</head>
 	
 

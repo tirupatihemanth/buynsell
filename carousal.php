@@ -8,10 +8,10 @@
 <div class="wrapper">
 
  <div id="slider">
-    <img id="1" src="carousal/img1.jpg"/>
-    <img id="2" src="carousal/img2.jpg"/>
-    <img id="3" src="carousal/img3.jpg"/>
-    <img id="4" src="carousal/img4.jpg"/>
+    <img class = 'carousel_img' id="1" src="carousal/img1.jpg"/>
+    <img class = 'carousel_img' id="2" src="carousal/img2.jpg"/>
+    <img class = 'carousel_img' id="3" src="carousal/img3.jpg"/>
+    <img class = 'carousel_img' id="4" src="carousal/img4.jpg"/>
  </div>
  <div class="main-nav">
  <a href="#" id="1l">img1</a>
