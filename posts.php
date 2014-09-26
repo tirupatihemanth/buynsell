@@ -11,9 +11,10 @@
     session_start();
 	include "header.php";
     include "db.php";
-	echo "<div class='col-xs-8 col-xs-offset-2'";
+	echo "<div class='col-xs-8 col-xs-offset-2'><h4 style='background-color:#505050;color:white;padding:10px;'>Top Deals</h4><hr>";
 	include "carousal.php";
-	echo"<br><br><br>";
+
+	echo"<br><br><br>";	echo "<hr>";
     if(!isset($_SESSION['user_id'])){
       header("Location: /buynsell/index.php?exp=1");
       exit();
@@ -27,19 +28,9 @@
       
     if(isset($_GET['myposts']) && $_GET['myposts'] == 1){
     
-      echo"<style>ul#tagsmenu li {display : inline; padding:5px;}</style> 
-      <ul id = 'tagsmenu'>
-	<li><a href = 'posts.php?tag_id=1&myposts=1'>mobiles</a></li>
-	<li><a href = 'posts.php?tag_id=2&myposts=1'>tablets</a></li>
-	<li><a href = 'posts.php?tag_id=3&myposts=1'>laptops</a></li>
-	<li><a href = 'posts.php?tag_id=4&myposts=1'>electronic devices</a></li>
-	<li><a href = 'posts.php?tag_id=5&myposts=1'>cycles</a></li>
-	<li><a href = 'posts.php?tag_id=6&myposts=1'>academics</a></li>
-	<li><a href = 'posts.php?tag_id=8&myposts=1'>eatables</a></li>
-	<li><a href = 'posts.php?tag_id=9&myposts=1'>others</a></li>
-      </ul>	";
-    
-      echo "<h3>This page shows posts only from you</h3>";
+	
+      echo "<h4 style='background-color:#505050;color:white;padding:10px;'>Your Posts</h4>";
+	  include "mini_menu.php";
       if(isset($_GET['tag_id'])){
 	$result_items = mysqli_query($connection,"SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND items.user_id = '{$_SESSION['user_id']}' AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC");
 	if(!$result_items)
@@ -50,13 +41,13 @@
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
 	    $array = mysqli_fetch_array($result_items);
-echo "<div class='item col-xs-3'><div class='item_details'>";
+	  echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center' style = 'color:green'><h4> ".$array['item_name']."</h4></span><br />";
-	  echo "<img class='center-block' src='pic.jpg' alt='404' height='200px' width='200px'>";
-	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span>";
+	  echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
+	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span></div></div>";
 	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
-	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";
+	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";	
 	  }
 	}
       }
@@ -69,8 +60,8 @@ echo "<div class='item col-xs-3'><div class='item_details'>";
 echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center' style = 'color:green'><h4> ".$array['item_name']."</h4></span><br />";
-	  echo "<img class='center-block' src='pic.jpg' alt='404' height='200px' width='200px'>";
-	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span>";
+	  echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
+	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span></div></div>";
 	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
 	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";
 
@@ -80,21 +71,10 @@ echo "<div class='item col-xs-3'><div class='item_details'>";
     }
     
     else if(isset($_GET['allposts']) && $_GET['allposts'] == 1){
-    
-      echo"<style> ul#tagsmenu li {display : inline; padding:5px;}</style> 
-      <ul id = 'tagsmenu'>
-	<li><a href = 'posts.php?tag_id=1&allposts=1'>mobiles</a></li>
-	<li><a href = 'posts.php?tag_id=2&allposts=1'>tablets</a></li>
-	<li><a href = 'posts.php?tag_id=3&allposts=1'>laptops</a></li>
-	<li><a href = 'posts.php?tag_id=4&allposts=1'>electronic devices</a></li>
-	<li><a href = 'posts.php?tag_id=5&allposts=1'>cycles</a></li>
-	<li><a href = 'posts.php?tag_id=6&allposts=1'>academics</a></li>
-	<li><a href = 'posts.php?tag_id=8&allposts=1'>eatables</a></li>
-	<li><a href = 'posts.php?tag_id=9&allposts=1'>others</a></li>
-      </ul>";
-    
-      echo "<h3>This page shows posts from all the users</h3>";
-      if(isset($_GET['tag_id'])){
+        
+      echo "<h4 style='background-color:#505050;color:white;padding:10px;'>All Deals</h4>";
+	include "mini_menu.php";
+	if(isset($_GET['tag_id'])){
       
 	$result_items = mysqli_query($connection,"SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC");
 	if(!$result_items)
@@ -105,10 +85,10 @@ echo "<div class='item col-xs-3'><div class='item_details'>";
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
 	    $array = mysqli_fetch_array($result_items);
-echo "<div class='item col-xs-3'><div class='item_details'>";
+	echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center' style = 'color:green'><h4> ".$array['item_name']."</h4></span><br />";
-	  echo "<img class='center-block' src='pic.jpg' alt='404' height='200px' width='200px'>";
+	  echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
 	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span>";
 	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
 	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";
@@ -144,7 +124,7 @@ $result = mysqli_query($con,"SELECT * FROM items") or die(mysqli_error($con));
 	  echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center' style = 'color:green'><h4> ".$array['item_name']."</h4></span><br />";
-	  echo "<img class='center-block' src='pic.jpg' alt='404' height='200px' width='200px'>";
+	  echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
 	  echo "<span class='center-block'><p class='text-center'>Rs. ".$array['price']."</p></span>";
 	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
 	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";

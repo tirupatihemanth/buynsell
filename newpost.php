@@ -32,10 +32,11 @@
 	    //print_r($result);
 	    $item_id = $result['item_id'];
 	    //echo $item_id;
-	    
+	    $name = $_FILES["photos"]["name"];
+		$ext = end((explode(".", $name)));
 	    //$_FILES["photos"]["tmp_name"] = "".$_FILES["photos"]["tmp_name"].$_SESSION['user_id'].$item_id;
 	    //echo "$_FILES['photos']['tmp_name']";
-		move_uploaded_file($_FILES["photos"]["tmp_name"],"photos_items/".$_SESSION['user_id'].$item_id.$_FILES["photos"]["name"]);
+		move_uploaded_file($_FILES["photos"]["tmp_name"],"photos_items/".$_SESSION['user_id'].$item_id.".".$ext);
 
 	    if(isset($_POST['category'])){
 	      
