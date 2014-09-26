@@ -15,6 +15,9 @@
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		
 		<style>
+			body{
+			background-color:#f4f4ee;
+			}
 			.dropdown:hover .dropdown-menu {
 							display: block;
 							}
@@ -30,6 +33,9 @@
 			.nav-top{
 			padding-top:1rem;
 			background-color:#057778;
+			}
+			.nav-bottom{
+			height:30px;
 			}
 			.input-lg{
 			border-radius:0px;
@@ -57,7 +63,22 @@
 			.nav-mini{
 			margin-top:0px;
 			}
-
+			.price{
+			margin-top:1rem;
+			color:#ff2000;
+			font-weight: bold;
+			font-size:1.5rem;
+			}
+			.offer{
+			width:100%;
+			height:10rem;
+			margin:1rem;
+			border:1px solid #e0e0e0;
+			padding:5px;
+			}
+			.wrap_offer{
+			position:relative;
+			}
 		</style>
 		<script>
 		$(document).ready(function(){
