@@ -32,11 +32,10 @@
 	    //print_r($result);
 	    $item_id = $result['item_id'];
 	    //echo $item_id;
-	    $name = $_FILES["photos"]["name"];
-		$ext = end((explode(".", $name)));
+	    
 	    //$_FILES["photos"]["tmp_name"] = "".$_FILES["photos"]["tmp_name"].$_SESSION['user_id'].$item_id;
 	    //echo "$_FILES['photos']['tmp_name']";
-		move_uploaded_file($_FILES["photos"]["tmp_name"],"photos_items/".$_SESSION['user_id'].$item_id.".".$ext);
+		move_uploaded_file($_FILES["photos"]["tmp_name"],"photos_items/".$_SESSION['user_id'].$item_id.$_FILES["photos"]["name"]);
 
 	    if(isset($_POST['category'])){
 	      
@@ -77,11 +76,9 @@
     <script src = "./ckeditor/ckeditor.js"></script>
   </head>
   <body>
-
     <?php
       include "header.php";
     ?>
-	<div class="col-xs-8 col-xs-offset-2">
     <h1>
       New Post
     </h1>
@@ -131,6 +128,5 @@
 	    <input type = "submit" name = "post" value = "post"></input>
 	</form>
     </p>
-	</div>
   </body>
 </html> 

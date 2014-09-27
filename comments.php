@@ -15,13 +15,13 @@
   }
   
     echo "<span style = 'color:green'>Public Comments(visible to all)</span><br />";
-    $comments = mysqli_query($connection,"SELECT message FROM comments WHERE item_id = '{$array['item_id']}' AND visibility = 1 ORDER BY timestamp ASC");
+    $comments = mysql_query("SELECT message FROM comments WHERE item_id = '{$array['item_id']}' AND visibility = 1 ORDER BY timestamp ASC",$connection);
     if(!$comments)
       die("Mysql query error has occured".mysql_error());
-    $rows = mysqli_num_rows($comments);
+    $rows = mysql_num_rows($comments);
 
     for($com=0;$com<$rows;$com++){
-      $comarray = mysqli_fetch_array($comments);
+      $comarray = mysql_fetch_array($comments);
       echo "<span style = 'background-color: yellow'>".($com+1).". ".$comarray[0]."</span><br />";
 
     }
