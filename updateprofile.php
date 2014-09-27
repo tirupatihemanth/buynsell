@@ -91,6 +91,7 @@
     <title>Update Profile | BUYNSELL@IITM</title>
   </head>
   <body>
+	<div class="col-xs-8 col-xs-offset-2">
     <h1>
       Update Your profile So that other people who buy your products can easily reach you
     </h1>
@@ -149,6 +150,7 @@
     
     
     ?>
+	</div>
   </body>
 
 </html>

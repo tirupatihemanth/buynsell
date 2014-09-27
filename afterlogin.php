@@ -31,7 +31,6 @@
 	<script src = "./ckeditor/ckeditor.js"></script>
     </head>
     <body>
-	<h1>
 	    <?php
 	      $connection = mysql_connect($WEBHOST,$USER,$PASSWORD);
 	      include "header.php";
@@ -45,13 +44,13 @@
 		$user = mysql_fetch_array($result);
 		$_SESSION['fullname'] = $user['fullname'];
 	      }
-	      if($_SESSION['fullname']=="")
-		echo "BUYNSELL@IITM WELCOMES ". $_SESSION['rollnum'];
-	      else
-		echo "BUYNSELL@IITM WELCOME ". $_SESSION['fullname'];
+	      //if($_SESSION['fullname']=="")
+		//echo "BUYNSELL@IITM WELCOMES ". $_SESSION['rollnum'];
+	      //else
+		//echo "BUYNSELL@IITM WELCOME ". $_SESSION['fullname'];
 
 	    ?>
-	</h1>
+	<div class="col-xs-8 col-xs-offset-2">
 	<h4>
 	    ...A Site For IITM Junta
 	</h4>
@@ -90,6 +89,6 @@
 	mysql_close($connection);
 	
 	?>
-	
+	</div>
     </body>
 </html>
