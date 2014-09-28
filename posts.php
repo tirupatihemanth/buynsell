@@ -46,7 +46,7 @@
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
 	    $array = mysqli_fetch_array($result_items);
-	    echo "<a href='viewpost?item_id=".$array['item_id'].">";
+	    echo "<a href='viewpost.php?item_id=".$array['item_id']."'>";
 	  echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
@@ -64,13 +64,15 @@
 	  die("Mysql query error".mysql_error());
 	for($i=0;$i<mysqli_num_rows($result_items);$i++){
 	  $array = mysqli_fetch_array($result_items);
-echo "<div class='item col-xs-3'><div class='item_details'>";
+	  echo "<a href = 'viewpost.php?item_id=".$array['item_id']."'>";
+		echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
 	  echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
 	  echo "<span class='center-block'><p class='text-center price'>Rs. ".$array['price']."</p></span></div></div>";
 	  //echo "<span>Description:<br /><span style = 'color:green'>".$array['description']."</span></span>";
 	  //echo "<span>Reason for selling:<br /><span style = 'color:green'>".$array['reason']."</span></span><br /><br><br>";
+	  echo "</a>";
 
 	}
       }
@@ -92,6 +94,7 @@ echo "<div class='item col-xs-3'><div class='item_details'>";
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
 	    $array = mysqli_fetch_array($result_items);
+	    echo "<a href = 'viewpost.php?item_id=".$array['item_id']."'>";
 	echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
@@ -112,13 +115,14 @@ echo "<div class='item col-xs-3'><div class='item_details'>";
 	  echo "<span><span color: green>email id: </span><span>".$userarray['emailid']."</span><br />";
 	  //include "comments.php";
 	  echo "<br><br></div></div>";
+	  echo "</a>";
 
 	  }
 	}
 	
       }
       else{
-$con=mysqli_connect("localhost","root","","buynsell");
+$con=mysqli_connect($WEBHOST,$USER,$PASSWORD,$DATABASE);
 // Check connection
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -128,6 +132,7 @@ $result = mysqli_query($con,"SELECT * FROM items") or die(mysqli_error($con));
 
 	for($i=0;$i<mysqli_num_rows($result);$i++){
 	  $array = mysqli_fetch_array($result);
+	  echo "<a href = 'viewpost.php?item_id=".$array['item_id']."'>";
 	  echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
@@ -148,6 +153,7 @@ $result = mysqli_query($con,"SELECT * FROM items") or die(mysqli_error($con));
 	  echo "<span><span color: green>email id: </span><span>".$userarray['emailid']."</span><br />";
 	  //include "comments.php";
 	  echo "<br><br></div></div>";
+	  echo "</a>";
 
 	}
       }
