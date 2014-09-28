@@ -35,6 +35,7 @@
     
 	
       echo "<h4 style='background-color:#505050;color:white;padding:10px;'>Your Posts</h4>";
+      $status = "myposts=1";
 	  include "mini_menu.php";
       if(isset($_GET['tag_id'])){
 	$result_items = mysqli_query($connection,"SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND items.user_id = '{$_SESSION['user_id']}' AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC");
@@ -46,7 +47,7 @@
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
 	    $array = mysqli_fetch_array($result_items);
-	    echo "<a href='viewpost.php?item_id=".$array['item_id']."'>";
+	    echo "<a href='viewpost.php?myposts=1&item_id=".$array['item_id']."'>";
 	  echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
@@ -62,9 +63,11 @@
 	$result_items = mysqli_query($connection,"SELECT * FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC");
 	if(!$result_items)
 	  die("Mysql query error".mysql_error());
+	if(mysqli_num_rows($result_items)==0)
+		echo "<p>You haven't made any posts. To post something click <a href='newpost.php'>here</a> or click post an AD at the top of the page</a></p>";
 	for($i=0;$i<mysqli_num_rows($result_items);$i++){
 	  $array = mysqli_fetch_array($result_items);
-	  echo "<a href = 'viewpost.php?item_id=".$array['item_id']."'>";
+	  echo "<a href = 'viewpost.php?myposts=1&item_id=".$array['item_id']."'>";
 		echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
@@ -82,6 +85,7 @@
     else if(isset($_GET['allposts']) && $_GET['allposts'] == 1){
         
       echo "<h4 style='background-color:#505050;color:white;padding:10px;'>All Deals</h4>";
+      $status = "allposts=1";
 	include "mini_menu.php";
 	if(isset($_GET['tag_id'])){
       
@@ -94,7 +98,7 @@
 	else{
 	  for($i=0;$i<$result_items_rows;$i++){
 	    $array = mysqli_fetch_array($result_items);
-	    echo "<a href = 'viewpost.php?item_id=".$array['item_id']."'>";
+	    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'>";
 	echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
@@ -132,7 +136,7 @@ $result = mysqli_query($con,"SELECT * FROM items") or die(mysqli_error($con));
 
 	for($i=0;$i<mysqli_num_rows($result);$i++){
 	  $array = mysqli_fetch_array($result);
-	  echo "<a href = 'viewpost.php?item_id=".$array['item_id']."'>";
+	  echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'>";
 	  echo "<div class='item col-xs-3'><div class='item_details'>";
 	  //echo "<span style = 'color:red'>Post Number: ".($i+1)."</span><br />";
 	  echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";

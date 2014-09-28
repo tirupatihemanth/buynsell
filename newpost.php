@@ -6,10 +6,15 @@
     exit();
   }
 ?>
-
+<html>
+  <head>
+    <title>BUYNSELL@IITM</title>
+    <script src = "./ckeditor/ckeditor.js"></script>
+  </head>
+  <body>
 
 <?php
-	
+	include "header.php";
 	$error = 0;
     $connection = mysql_connect($WEBHOST, $USER, $PASSWORD);
     mysql_select_db($DATABASE,$connection);
@@ -65,22 +70,11 @@
 	    }
 	}
     if($error == 0)
-    echo "<span style= 'color:green'><b>Your posts has been successfully posted. Check your posts or All posts to have a look at it</b></span>";
+    echo "<span style= 'color:green'><b><br /><br /><br /><br />Your posts has been successfully posted. Check My posts or All posts to have a look at it</b></span>";
     mysql_close($connection);
   }
 
 ?>
-
-<html>
-  <head>
-    <title>BUYNSELL@IITM</title>
-    <script src = "./ckeditor/ckeditor.js"></script>
-  </head>
-  <body>
-
-    <?php
-      include "header.php";
-    ?>
 	<div class="col-xs-8 col-xs-offset-2">
     <h1>
       New Post

@@ -16,13 +16,14 @@
 			echo "<span style = color:red>file extension must be one among 'gif', 'jpeg','jpg','png'</span>";
 		}
 	}
+	/*
 	if($error == 0){
-			if(file_exists("photos_items/".$_FILES["photos"]["tmp_name"])){
-			echo "<span style = color:red>You have uploaded a file with same name before<br /></span>";
+			if(file_exists("photos_items/".$_SESSION['user_id'].$item_id)){
+			echo "<span style = color:red>You have uploaded the same photo before<br /></span>";
 			$error = 1;
 		}
 	}
-
+	*/
 
 /*	if($_FILES["photos"]["error"]>0)
 		echo "Error Uploading Your file: ".$_FILES["photos"]["error"]."<br />";

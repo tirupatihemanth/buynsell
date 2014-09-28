@@ -25,3 +25,10 @@ TARGET FEATURES:
 
 23/10/2014
      In the latest commit I have added a new feature for the users to upload pictures of their products with size less than 10MB and one among the formats jpeg,jpg,png :)
+
+28/10/2014
+     In the latest commit I have added the feedback page, A public profile page for users so that when ever a person receaves a public message or a private message he will be able know who that person is, A page for each specific post giving details about the product and seller and minor bug fixes :)
+
+
+
+

@@ -134,6 +134,7 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<div class="nav nav-pills menu-links">
 							<ul class="nav navbar-nav pull-left">
+
 							
 		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">ELETRONICS<span class="caret"></span></a>
@@ -147,6 +148,7 @@
             <li><a href="#">One more separated link</a></li>
           </ul>
         </li>	
+
 								 <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">ACCESSORIES <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -207,7 +209,7 @@
             <li><a href="#">One more separated link</a></li>
           </ul>
         </li>				
-								 <li class="dropdown">
+		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">MORE <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
@@ -237,7 +239,7 @@
             <li role="presentation"><a role="menuitem"  href="posts.php?myposts=1">My Posts</a></li>
             <li role="presentation"><a role="menuitem"  href="updateprofile.php">Settings</a></li>
             <li class="divider"></li>
-            <li role="presentation"><a role="menuitem"  href=#>Feedback</a></li>
+            <li role="presentation"><a role="menuitem"  href="feedback.php">Feedback</a></li>
             <li class="divider"></li>
             <li role="presentation"><a role="menuitem"  href="logout.php">Logout</a></li>
           </ul>

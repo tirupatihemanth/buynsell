@@ -13,13 +13,9 @@
 	}
 	mysql_select_db($DATABASE,$connection);
 
-
-?>
-
-<?php
 	include "header.php";
-if(isset($_GET['item_id'])){
-	$result = mysql_query("SELECT * FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'",$connection);
+	if(isset($_GET['item_id'])){
+		$result = mysql_query("SELECT * FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'",$connection);
 	if(!$result)
 		die("Mysql query error ".mysql_error());
 	$product = mysql_fetch_array($result);
@@ -35,8 +31,10 @@ if(isset($_GET['item_id'])){
 	echo "Phone No.: ".$product['phoneno']."<br /><br />";
 	echo "Hostel: ".$product['hostel']."<br /><br />";
 	echo "Room No.: ".$product['roomno']."<br /><br />";
+	echo "<a href='photos_items/".$product['user_id'].$_GET['item_id']."'><img src='photos_items/".$product['user_id'].$_GET['item_id']."' alt='404' height='200px' width='200px'></a>";
 }
 
 echo "<p style = 'color:red'>Caution: The info in this page is as provided by the seller and buynsell or Insti Webops have no responsibility over the quality of the products</p>";
-
+$array['item_id'] = $_GET['item_id'];
+include "comments.php";
 ?>

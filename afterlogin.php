@@ -44,10 +44,10 @@
 		$user = mysql_fetch_array($result);
 		$_SESSION['fullname'] = $user['fullname'];
 	      }
-	      //if($_SESSION['fullname']=="")
-		//echo "BUYNSELL@IITM WELCOMES ". $_SESSION['rollnum'];
-	      //else
-		//echo "BUYNSELL@IITM WELCOME ". $_SESSION['fullname'];
+	     if($_SESSION['fullname']=="")
+		echo "<br /><br />BUYNSELL@IITM WELCOMES ". $_SESSION['rollnum'];
+	      else
+	echo "BUYNSELL@IITM WELCOMES ". $_SESSION['fullname'];
 
 	    ?>
 	<div class="col-xs-8 col-xs-offset-2">
@@ -59,21 +59,24 @@
 	<p>We would like to Introduce to our all new news feed. This feed contans some important notifications such as comments on your posts and also private messages sent to you</p>
 	<h3>Public comments on your posts</h3>
 	<?php
-	$pubcomments = mysql_query("SELECT comments.user_com_id,comments.message FROM items, comments WHERE items.item_id = comments.item_id AND user_id = '{$_SESSION['user_id']}' AND visibility = 1",$connection);
+	$pubcomments = mysql_query("SELECT comments.user_com_id,comments.message,userinfo.rollno FROM items, comments, userinfo WHERE items.item_id = comments.item_id AND items.user_id = '{$_SESSION['user_id']}' AND userinfo.id = comments.user_com_id AND visibility = 1",$connection);
 	if(!$pubcomments)
 	  die("Mysql query error has occured".mysql_error());
 	$rows = mysql_num_rows($pubcomments);
+//	echo "<br />blah blah blah<br />";
+//	print_r($rows);
 	if($rows == 0){
 	  echo "<span style = 'background-color:#f7f7f7'>Nothing to see here move along :)</span><br />";
 	}
 	else{
 	  for($i = 0;$i<$rows;$i++){
 	    $array = mysql_fetch_array($pubcomments);
-	    echo "<span style = 'background-color:yellow'>".($i+1).". ".$array['message']."</span><br />";
+	    echo "<span>Sender: <a href='viewprofile.php?user_id=".$array['user_com_id']."'>".$array['rollno']."</a></span><br />";
+	    echo "<span style = 'background-color:yellow'>".($i+1).". ".$array['message']."</span><br /><br />";
 	  }
 	}
 	echo "<h3>Some private messages you have got</h3>";
-	$privcomments = mysql_query("SELECT comments.user_com_id,comments.message FROM items, comments WHERE items.item_id = comments.item_id AND user_id = '{$_SESSION['user_id']}' AND visibility = 0",$connection);
+	$privcomments = mysql_query("SELECT comments.user_com_id, comments.message, userinfo.rollno FROM items, comments,userinfo WHERE items.item_id = comments.item_id AND user_id = '{$_SESSION['user_id']}' AND userinfo.id = comments.user_com_id AND visibility = 0",$connection);
 	if(!$privcomments)
 	  die("Mysql query error has occured".mysql_error());
 	$rows = mysql_num_rows($privcomments);
@@ -82,7 +85,9 @@
 	}
 	else{
 	  for($i = 0;$i<$rows;$i++){
+
 	    $array = mysql_fetch_array($privcomments);
+	    echo "<span>Sender: <a href='viewprofile.php?user_id=".$array['user_com_id']."'>".$array['rollno']."</a></span><br />";
 	    echo "<span style = 'background-color:yellow'>".($i+1).". ".$array['message']."</span><br />";
 	  }
 	}

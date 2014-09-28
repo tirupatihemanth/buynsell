@@ -14,14 +14,24 @@
 		die("Mysql connection to the database failed ".Mysql_error());
 	}
 	mysql_select_db($DATABASE,$connection);
-	
-		$userinfo = mysql_query("SELECT * FROM userinfo WHERE id = '{$_SESSION['user_id']}'",$connection);
-		if(!$userinfo)
-			die("Mysql query error has occured".Mysql_error());
-	$userarray = mysql_fetch_array($userinfo);
-	
-	echo "<br /><br /><br /><br /><a href = 'updateprofile.php'>Update Profile</a><br /><br />";
+		
+	if( !isset($_GET['user_id']) || ( $_SESSION['user_id'] == $_GET['user_id'] )){
 
+		$userinfo = mysql_query("SELECT * FROM userinfo WHERE id = '{$_SESSION['user_id']}'",$connection);
+			if(!$userinfo)
+				die("Mysql query error has occured".Mysql_error());
+		$userarray = mysql_fetch_array($userinfo);
+		echo "<br /><br /><br /><br /><a href = 'updateprofile.php'>Update Profile</a><br /><br />";
+	}
+
+	else{
+
+		$userinfo = mysql_query("SELECT * FROM userinfo WHERE id = '{$_GET['user_id']}'",$connection);
+			if(!$userinfo)
+				die("Mysql query error has occured".Mysql_error());
+		$userarray = mysql_fetch_array($userinfo);
+		echo "<br /><br /><br /><br />";
+	}
 	if(mysql_num_rows($userinfo)==0)
 		die("No such user exists");
 	echo"
