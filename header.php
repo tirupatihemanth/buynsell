@@ -10,7 +10,7 @@
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		
 		<style>
-			#container{
+			#contain{
 				width:1892px;								/* when we give excat width then on changing the screen size things wont move, if we had written width:100%; then tthings would change on changing the screen size*/ 
 				margin:auto;
 				}
@@ -68,7 +68,7 @@
 			#search{
 				position: relative;
 				left:-350px;
-				top:20px;
+				top:16px;
 				width: 650px;
 
 				}
@@ -133,7 +133,7 @@
 	
 
 	<body>
-		<div id="container">
+		<div id="contain">
 			<nav id="container1" role="navigation">
 				<div style="display:inline-block;" >
 					<a href="posts.php?allposts=1">
