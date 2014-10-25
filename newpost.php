@@ -7,12 +7,65 @@
   }
 ?>
 <html>
-  <head>
-    <title>BUYNSELL@IITM</title>
-    <script src = "./ckeditor/ckeditor.js"></script>
-  </head>
-  <body>
+	<head>
+   		<title>BUYNSELL@IITM</title>
+    	<script src = "./ckeditor/ckeditor.js"></script>	
+		<script src="bootstrap/jquery-1.11.1"></script>
+		<script src="bootstrap/jquery-2.1.1"></script>			<!-- Latest compiled and minified CSS -->	
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">	<!-- Optional theme -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"><!-- Latest compiled and minified JavaScript -->
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		
+		<style>
+			#container{
+				width: 1220px;
+				margin: 10px auto 0px;
+				background-color: rgba(255,255,204, .1);
+				border-radius: 20px;
+				border:2px solid black;
+				padding-left: 15px;
+				padding-right: 15px;
+				box-shadow: 10px 10px 20px;
+				margin-bottom: 20px;
+				}
 
+			select,input.fat{
+				
+    			font-size: 20px;
+				box-shadow: 2px 2px	10px;
+				padding: 7px 5px;
+				margin: 10px 0;
+				width: 100%;
+				display: block;
+				border-radius: 5px;
+				border: none;
+				}
+
+			#button{
+				font-size: 20px;
+				box-shadow: 2px 2px	10px;
+				padding: 7px 5px;
+				margin: 10px ;
+				width: 150px;
+				display: block;
+				border-radius: 5px;
+				border: none;
+				}
+
+			table{
+				width:50%;
+				margin:20px;
+				
+				}
+			tr{
+				height:25px;
+			}
+
+
+		</style>
+  </head>
+
+	<body>
 <?php
 	include "header.php";
 	$error = 0;
@@ -75,56 +128,73 @@
   }
 
 ?>
-	<div class="col-xs-8 col-xs-offset-2">
-    <h1>
-      New Post
-    </h1>
-    <p>
-      <h3>
-	Very Few Suggestions:
-      <h3>
-      <p>
-	Try to be precise in giving description and reasons for selling. Please choose the appropriate tags so that we can show the most relavant information to the buyers
-      </p>
-      <form method="post" action = "newpost.php" enctype = "multipart/form-data">
-	    <p>
-		Enter the name of the object you would like to sell precisely below:
-	    </p>
-	    <p>
-		Name:<input type ="text" name = "item_name"></input>
-	    </p>
-	    <p>
-		Selling Price(in Rs):<input type = "number" name="price"></input>
-	    </p>
-	    <p>
-	      Please choose related tags from below:
-	    </p>
-	    <p>
-	      <input type = "checkbox" name = "category[]" value = "mobiles">Mobiles</input>
-	      <input type = "checkbox" name = "category[]" value = "tablets">Tablets</input>
-	      <input type = "checkbox" name = "category[]" value = "laptops">Laptops</input>
-	      <input type = "checkbox" name = "category[]" value = "electronic devices">Electronic Devices</input>
-	      <input type = "checkbox" name = "category[]" value = "cycles">Cycles</input>
-	      <input type = "checkbox" name = "category[]" value = "academics">Academics Related</input>
-	      <input type = "checkbox" name = "category[]" value = "eatables">Eatables</input>
-	      <input type = "checkbox" name = "category[]" value = "others">others</input>
-	    </p>
-	    <p>Upload genuine photos of your product</p>
-	    <input type = "file" name = "photos"></input>
-	    <p>
-		Brief Description:
-	    </p>
-	    <textarea class = "ckeditor" id = "editor1" name = "description"></textarea>
-	    <script> CKEDITOR.replace('editor1');</script>
-	    <p>
-	      Specific reason for selling your product:
-	    </p>
-	    <textarea class = "ckeditor" id = "editor2" name = "reason"></textarea>
-	    <script> CKEDITOR.replace('editor2');</script>
-	    <br />
-	    <input type = "submit" name = "post" value = "post"></input>
-	</form>
-    </p>
-	</div>
-  </body>
+		<div id="container">
+			<h1 style="margin-left:40%;"><b><u>NEW POST</u></b></h1>
+
+			<div >
+				<h3><b>Suggestions:</b></h3>
+				<h3>
+					<ul>
+						<li>Try to be precise in giving description and reasons for selling.</li>
+						<li>Please choose the appropriate tags so that we can show the most relavant information to the buyers</h3>
+						</li>
+					</ul>
+				</h3>
+			</div>
+			<hr>
+			<form method="post" role="form" action = "newpost.php" enctype = "multipart/form-data">
+				<table>
+					<tr>
+						<td><label ><h3><b>Name Of Object:</h3></b></label></td>
+						<td><input class ="fat " name = "item_name" id="ex1" type="text" placeholder=" Ad Title"></td>
+					</tr>
+			
+					<tr>
+						<td><label for="ex2"><h3><b>Selling Price(in Rs):<b></h3></label></td>
+						<td><input class ="fat "type="text"    name = "price" class ="input-lg  " id="ex2" placeholder ="  Ruppees"></td>
+		    		</tr>
+		      		
+		   	   		<div class="form-group">
+						<tr>
+							<td><label for="sel1"><h3><b>Choose Category:</b></h3></label></td>
+							<td>
+								<select class ="fat " id="sel1">
+									<option>- - - - - - - - - - - - - - - - -</option> 
+									<option>Electronics</option>
+									<option>Accessories</option>
+									<option>Mens Wear</option>
+									<option>Women's Wear</option>
+									<option>Books</option>
+									<option>Vehicles</option>
+									<option>More</option>
+								</select>
+							</td>
+						</tr>
+					</div>
+				</table>
+				<div style="margin:10px;">   	
+					<h3>Upload genuine photos of your product</h3>
+					
+					<input id="button" style=" width:50%;" class=" btn btn-primary " type = "file" placeholder="Browse" name = "photos"></input>
+					<input id="button" style=" width:50%;" class=" btn btn-primary " type = "file" placeholder="Browse" name = "photos"></input>
+					<input id="button" style=" width:50%;" class=" btn btn-primary " type = "file" placeholder="Browse" name = "photos"></input>
+
+				    <h3>Brief Description:</h3>
+
+				    <textarea style="border-radius:15px; box-shadow: 3px 3px 10px; width:95%; height:250px;" name = "description"></textarea>
+	<!-- i wanna remove the(class = "ckeditor" id = "editor1") part-->
+				    <script> CKEDITOR.replace('editor1');</script>
+
+				    <h3>Specific reason for selling your product:</h3>
+
+				    <textarea style="border-radius:15px; box-shadow: 3px 3px 10px; width:95%; height:250px;"  name = "reason"></textarea>
+	<!-- i wanna remove the(class = "ckeditor" id = "editor2") part-->
+				    <script> CKEDITOR.replace('editor2');</script>
+
+				    </br>
+					<button id="button"  type="submit" class="btn btn-primary btn-lg"name = "post" value = "post">POST</button>
+				</div>
+			</form>
+	    </div>
+	</body>
 </html> 
