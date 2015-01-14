@@ -5,6 +5,23 @@ include "db.php";
 
 session_start();
 
+require 'oauth/oauth_config.php';
+require 'oauth/oauth.php';
+
+$oauth = new OAuth();
+$oauth->init();
+if($oauth->authCode){
+$_SESSION['authcode'] = $oauth->authCode;
+}
+if($oauth->user['loggedIn']){
+  print_r($oauth->user);
+  $_SESSION['user_id']=$oauth->user['username'];
+  redirectTo("afterlogin.php");
+}
+else {
+  echo "<a href='$oauth->signinURL'>Sign In</a> "  ;
+}/*
+
 $connection = mysql_connect($WEBHOST,$USER,$PASSWORD);
 if(!$connection){
   die("Mysql connection with the database failed".mysql_error());
@@ -101,3 +118,4 @@ if(isset($_GET['logout']) && $_GET['logout'] == 1){
 
     </body>
 </html>
+*/

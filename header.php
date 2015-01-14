@@ -249,7 +249,7 @@
 					            <li class="divider"></li>
 					            <li role="presentation"><a role="menuitem"  href="feedback.php">Feedback</a></li>
 					            <li class="divider"></li>
-					            <li role="presentation"><a role="menuitem"  href="logout.php">Logout</a></li>
+					            <li role="presentation"><a role="menuitem"  href="oauth/signout.php">Logout</a></li>
 					        </ul>
 					   </div>	
 					</div>
