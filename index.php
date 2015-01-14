@@ -99,6 +99,37 @@ Note: A Sass implementation can make this easier. Please look into that if you c
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="dnb.css">  
         <style>
+          #text{
+           
+            font-family:  "PT Serif", serif;;
+
+          }
+         
+
+          #table{
+            padding-top:10px;
+            width:420px;
+            margin:auto;
+            border:1px #FFFFFF;
+
+          }
+          #back{
+            background-color:#f6f6f6 ;
+            z-index: -10;
+          }
+
+          #login{
+            background-color: #FFFFFF;
+            margin:auto;
+            height:300px;
+            width:500px;
+            border-radius: 5px;
+            box-shadow: 1px 1px 15px;
+
+          }
+
+
+
             #dnb_sec {
                 -skrollr-animation-name:animation1;
             }
@@ -251,27 +282,31 @@ if(isset($_GET['logout']) && $_GET['logout'] == 1){
 }
 
 ?>
-  <h1 id = "welcome">
-      Welcome To BUY&SELL@IITM
-  </h1>
-  <h4>
-      An Online Market For The Insti Junta
-  </h4>
-  <p>
-      Login to see all the products
-  </p>
-  <h3>
-      Login Here:
-  </h3>
-  <form method = "POST" action="index.php">
-      <p>
-    Roll No.: <input type = "text" name = "rollno"></input>
-      </p>
-      <p>
-    Password:<input type = "password" name = "password"></input>  
-      </p>
-      <input type="submit" name = "login" value = "Login"></input>
-  </form>
+
+
+
+<div id= "back">
+  <div id = "login">
+    <div id ="table">
+      <h3 id="text" >
+        <b> Log In </b>
+        <hr>
+      </h3>
+      <form method = "POST" action="index.php">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Roll No.</label>
+          <input type="text" name = "rollno" class="form-control" id="exampleInputEmail1" placeholder="Roll No.">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" name = "password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <input type="submit" class="btn btn-primary" name = "login" value = "Login"></input>
+        <div class="form-group">
+      </form>
+    </div>
+  </div>
+</div>
 <!--Insert content replacing the para and heading below-->
         </div>
     
