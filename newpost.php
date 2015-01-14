@@ -136,8 +136,8 @@
 				<h3>
 					<ul>
 						<li>Try to be precise in giving description and reasons for selling.</li>
-						<li>Please choose the appropriate tags so that we can show the most relavant information to the buyers</li>
-						<li>Also your posts will not be shown in all posts after 15 days If you would like to show them again you should renew them in myposts page</li>
+						<li>Please choose the appropriate tags so that we can show the most relavant information to the buyers</h3>
+						</li>
 					</ul>
 				</h3>
 			</div>

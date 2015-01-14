@@ -57,8 +57,6 @@
 	<p>We thank you for joining our project of making the Life At IITM more peaceful!!!</p>
 	<p>You have some unused products and would like to sell them It's simple now.  Post Below:</p>
 	<p>We would like to Introduce to our all new news feed. This feed contans some important notifications such as comments on your posts and also private messages sent to you</p>
-	<p>Wanna share a cab with some one?</p>
-	<a href="shareacab.php">SHARE A CAB</a>
 	<h3>Public comments on your posts</h3>
 	<?php
 	$pubcomments = mysql_query("SELECT comments.user_com_id,comments.message,userinfo.rollno FROM items, comments, userinfo WHERE items.item_id = comments.item_id AND items.user_id = '{$_SESSION['user_id']}' AND userinfo.id = comments.user_com_id AND visibility = 1",$connection);
