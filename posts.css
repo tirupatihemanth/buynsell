@@ -1,0 +1,19 @@
+.posts{
+    padding:10px;
+    border:1px solid #888;
+}
+.cmt_text{
+    color:#ccc;
+    font-size: 0.8em;
+}
+.cmt_text a{
+    font-size:0.925em;
+}
+body{
+    background-color: #ddd;
+}
+.cmt_box{
+    background-color:rgba(255,255,255,0.9);
+    border-radius: 4px;
+    margin:5px;
+}
