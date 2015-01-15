@@ -16,7 +16,7 @@
 				}
 
 			#container1{
-				background-image: url("https://encrpted-tbn2.gstatic.com/images?q=tbn:ANd9GcRBhyjc_CfciODIJ4F_zZDMbROQrIl11PjZlZ3G_yuK79hsFMXL");
+				background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRBhyjc_CfciODIJ4F_zZDMbROQrIl11PjZlZ3G_yuK79hsFMXL");
     			background-repeat: repeat-x;
 				margin-bottom: 0px;
 				border:0px;
