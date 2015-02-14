@@ -9,13 +9,16 @@
 			else{
 				$error = 1;
 				echo "<span style = color:red>make sure the size of the pic is less than 10MB</span>";
+				break;
 			}
 		}
-		else if($i == 4){
-			$error = 1;
-			echo "<span style = color:red>file extension must be one among 'gif', 'jpeg','jpg','png'</span>";
-		}
 	}
+	
+	if($i == 4 && $error!=1){
+		$error = 1;
+		echo "<span style = color:red>file extension must be one among 'gif', 'jpeg','jpg','png'</span>";
+	}
+	
 	/*
 	if($error == 0){
 			if(file_exists("photos_items/".$_SESSION['user_id'].$item_id)){

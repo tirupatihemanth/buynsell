@@ -1,21 +1,42 @@
 <?php
-
-  // This php file contains the functions that I will be using frequently using
-
-  function redirectTo($address){
-      header("Location: /buynsell/$address");
-      exit();
-  }
-  
-  function connectioncheck($connection){
-    if(!connection)
-      die("Mysql connection to database failed ".mysql_error());
-  }
-  
-  function querycheck($result){
-    if(!result)
-      die("There was an error in your mysql query".mysql_error());
-  }
-
+	
+	// All the functions necessary for the project
+	require_once 'db.php';
+	
+	function sessionCheck(){
+		if(!isset($_SESSION['user_rollno'])){
+			redirectTo("index.php");
+		}	
+	}
+	
+	function redirectTo($address) {
+		header ( "Location: $address" );
+		exit ();
+	}
+	
+	function getConnection() {
+		global $WEBHOST;
+		global $USER;
+		global $PASSWORD;
+		global $DATABASE;
+		
+		$connectionObject = new mysqli ( $WEBHOST, $USER, $PASSWORD, $DATABASE );
+		
+		if ($connectionObject->connect_errno) {
+			die ( "Mysql connection to database failed: " . $connectionObject->connect_error );
+		}
+		
+		return $connectionObject;
+	}
+	
+	
+	function queryDB(mysqli $connectionObject, $query) {
+		$resultObject = $connectionObject->query ( $query );
+		if (! $resultObject) {
+			die ( "Mysql query failed: " . $connectionObject->error );
+		}
+		return $resultObject;
+	}
+	
 ?>
 
