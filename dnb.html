@@ -73,68 +73,60 @@ Note: A Sass implementation can make this easier. Please look into that if you c
             
             <div id = 'dnb_sec' class='dnb_secondary col-xs-12'>
                 <nav>
-                    <span class='col-xs-2'><div class='btn2 col-xs-12 pull-left' id='dnb_secondary_logo' data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)">
-                        Information<b>&nbsp;Portal</b>&nbsp;</div>
-                    </span>
-                    
-                    <span class='col-xs-2 dropdown'><div class='btn2 col-xs-12 pull-left' data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)" data-toggle="dropdown">
-                        <b>Alaknanda&nbsp;Hostel&nbsp;</b><span class="caret"></span>
-                    </div>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li><a href="#">Option 1</a></li>
-                            <li><a href="#">Option 2</a></li>
-                            <li><a href="#">Option 3</a></li>
-                            <li><a href="#">Option 4</a></li>
-                            <li><a href="#">Option 5</a></li>
-                            <li><a href="#">Option 6</a></li>
-                        </ul></span>
+                    <a href='posts.php?allposts=1'><span class='col-xs-2'><div class='btn2 col-xs-12 pull-left' id='dnb_secondary_logo' data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)">
+                        <b>Buy&nbsp;</b>&amp;<b>&nbsp;Sell</b>&nbsp;</div>
+                    </span></a>
                     
                     <div class="hidden-sm hidden-xs col-md-2 dropdown pull-right">
-                        <a class="pull-right dropdown-toggle col-xs-12" data-toggle="dropdown" href="#">
-                            <span class="col-xs-12 btn2 glyphicon glyphicon-user pull-right" data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)" aria-hidden="true">
-                                Username
+                        <a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="btn2 glyphicon glyphicon-user pull-right" data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)" aria-hidden="true">
+                                <?php echo $_SESSION['user_fullname']; ?>
                                 <span class="caret"></span>
                             </span>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li><a href="#">Option 1</a></li>
-                            <li><a href="#">Option 2</a></li>
+                            <li><a href="posts.php?myposts=1">My Posts</a></li>
+                            <li><a href="viewprofile.php">View Profile</a></li>
+                            <li><a href="updateprofile.php">Update Profile</a></li>
+                            <li><a href="feedback.php">Feedback</a></li>
+                            <li><a href="oauth/signout.php">Logout</a></li>
                         </ul>
                     </div>
-
+                    
+                    <div class='col-xs-1 ad pull-right'><a href='newpost.php'><button type="button" class="btn btn-success">Post an Ad</button></a></div>
                     <ul class='col-xs-6'>
                         
                         <li class='hidden-xs col-sm-3 col-md-3 col-lg-2'>
                             <div class='btn2'>
                                 <a data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)" href="/html/">
-                                    Secretaries
+                                    Books
                                 </a>
                             </div> 
                         </li>
                         <li class='hidden-xs col-sm-3 col-md-3 col-lg-2'>
                             <div class='btn2'>
                                 <a data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)" href="/css/">
-                                    Office
+                                    Mobiles
                                 </a>
                             </div>
                         </li>
                         <li class='hidden-xs col-sm-3 col-md-3 col-lg-2'>
                             <div class='btn2'><a data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)" href="/js/">
-                                Services
+                                Coupons
                                 </a>
                             </div>
                         </li>
                         <li class='hidden-xs hidden-sm hidden-md col-lg-2'>
                             <div class='btn2'>
                                 <a data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)" href="/jquery/">
-                                Litsoc
+                                Electronics
                                 </a>
                             </div>
                         </li>
                         <li class='hidden-xs hidden-sm hidden-md col-lg-2'>
                             <div class='btn2'>
                                 <a data-0="color:rgb(255,255,255)" data-50="color:rgb(0,0,0)" href="/jquery/">
-                                    TechSoc
+                                    Stationery
                                 </a>
                             </div>
                         </li>

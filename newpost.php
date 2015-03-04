@@ -4,67 +4,9 @@ session_start ();
 sessionCheck();
 ?>
 <html>
-<head>
-<title>BUYNSELL@IITM</title>
-<script src="./ckeditor/ckeditor.js"></script>
-<script src="bootstrap/jquery-1.11.1"></script>
-<script src="bootstrap/jquery-2.1.1"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-<style>
-#container {
-	width: 1220px;
-	margin: 10px auto 0px;
-	background-color: rgba(255, 255, 204, .1);
-	border-radius: 20px;
-	border: 2px solid black;
-	padding-left: 15px;
-	padding-right: 15px;
-	box-shadow: 10px 10px 20px;
-	margin-bottom: 20px;
-}
-
-select, input.fat {
-	font-size: 20px;
-	box-shadow: 2px 2px 10px;
-	padding: 7px 5px;
-	margin: 10px 0;
-	width: 100%;
-	display: block;
-	border-radius: 5px;
-	border: none;
-}
-
-#button {
-	font-size: 20px;
-	box-shadow: 2px 2px 10px;
-	padding: 7px 5px;
-	margin: 10px;
-	width: 150px;
-	display: block;
-	border-radius: 5px;
-	border: none;
-}
-
-table {
-	width: 50%;
-	margin: 20px;
-}
-
-tr {
-	height: 25px;
-}
-</style>
-</head>
-
 <body>
 <?php
-include "header.php";
+include "dnb.html";
 
 $connectionObject = getConnection();
 if (isset ( $_POST ['post'] )) {
@@ -122,7 +64,7 @@ if (isset ( $_POST ['post'] )) {
 
 ?>
 		<div id="container">
-		<h1 style="margin-left: 40%;">
+		<h1>
 			<b><u>NEW POST</u></b>
 		</h1>
 
@@ -196,7 +138,6 @@ if (isset ( $_POST ['post'] )) {
 				<h3>Brief Description:</h3>
 
 				<textarea
-					style="border-radius: 15px; box-shadow: 3px 3px 10px; width: 95%; height: 250px;"
 					name="description"></textarea>
 				<!-- i wanna remove the(class = "ckeditor" id = "editor1") part-->
 				<script> CKEDITOR.replace('editor1');</script>
@@ -204,7 +145,6 @@ if (isset ( $_POST ['post'] )) {
 				<h3>Specific reason for selling your product:</h3>
 
 				<textarea
-					style="border-radius: 15px; box-shadow: 3px 3px 10px; width: 95%; height: 250px;"
 					name="reason"></textarea>
 				<!-- i wanna remove the(class = "ckeditor" id = "editor2") part-->
 				<script> CKEDITOR.replace('editor2');</script>

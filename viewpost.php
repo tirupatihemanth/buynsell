@@ -12,7 +12,7 @@
 // 	}
 // 	mysql_select_db($DATABASE,$connection);
 
-	include "header.php";
+	include "dnb.html";
 	if(isset($_GET['item_id'])){
 		$resultObject = queryDB($connectionObject, "SELECT items.*, userinfo.fullname FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'");
 		//$result = mysql_query("SELECT * FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'",$connection);

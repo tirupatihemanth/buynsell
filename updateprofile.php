@@ -3,8 +3,8 @@
 session_start ();
 require_once 'functions.php';
 sessionCheck ();
-include "header.php";
-
+//include "header.php";
+include "dnb.html";
 $html_auto_fill = array ();
 //$passwordmismatch = 0;
 //$passworderror = 0;

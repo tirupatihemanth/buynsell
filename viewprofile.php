@@ -8,8 +8,9 @@
 
 ?>
 <?php
-	include "header.php";
-	$connection = mysql_connect($WEBHOST,$USER,$PASSWORD);
+	//include "header.php";
+	include "dnb.html";
+    $connection = mysql_connect($WEBHOST,$USER,$PASSWORD);
 	if(!$connection){
 		die("Mysql connection to the database failed ".Mysql_error());
 	}
