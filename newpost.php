@@ -112,7 +112,7 @@ if (isset ( $_POST ['post'] )) {
 						<td><label for="sel1"><h3>
 									<b>Choose Category:</b>
 								</h3></label></td>
-						<td><select class="fat " name = "category" id="sel1">
+						<td><select class="fat " name = "category" id="sel1" multiple>
 								<option>- - - - - - - - - - - - - - - - -</option>
 								<option>Electronics</option>
 								<option>Accessories</option>
