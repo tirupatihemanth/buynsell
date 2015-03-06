@@ -1,45 +1,28 @@
 <?php
+
 	$validextns = array("gif","jpeg","jpg","png");
-	$temp = explode(".",$_FILES["photos"]["name"]);
-	$currentextn = end($temp);
-	for($i = 0;$i<4;$i++){
-		if($_FILES["photos"]["type"]== "image/".$validextns[$i]){
-			if($_FILES["photos"]["size"]<10000000)
-				break;
-			else{
-				$error = 1;
-				echo "<span style = color:red>make sure the size of the pic is less than 10MB</span>";
+	//print_r($_FILES['photos']['tmp_name']);
+	
+	for($j = 0;$j<3;$j++){
+		for($i=0;$i<sizeof($_FILES['photos']['name']);$i++){
+			
+			if($_FILES["photos"]["type"][$j]== "image/".$validextns[$i]){
+				if($_FILES["photos"]["size"][$j]<10000000)
+					break;
+				else{
+					$error = 1;
+					echo "<span style = color:red>make sure the size of the pic is less than 10MB</span>";
+					break;
+				}
 				break;
 			}
+			else if($i == 3){
+				$error = 1;
+				echo "<span style = color:red>The photo numbered ".$j."you have uploaded must of the file type 'gif', 'jpeg','jpg','png'</span>";
+			}
+				
 		}
+			
 	}
 	
-	if($i == 4 && $error!=1){
-		$error = 1;
-		echo "<span style = color:red>file extension must be one among 'gif', 'jpeg','jpg','png'</span>";
-	}
-	
-	/*
-	if($error == 0){
-			if(file_exists("photos_items/".$_SESSION['user_id'].$item_id)){
-			echo "<span style = color:red>You have uploaded the same photo before<br /></span>";
-			$error = 1;
-		}
-	}
-	*/
-
-/*	if($_FILES["photos"]["error"]>0)
-		echo "Error Uploading Your file: ".$_FILES["photos"]["error"]."<br />";
-	else{
-//		echo "Upload: ".$_FILES['photos']["name"]."<br />";
-//		echo "Type: ".$_FILES['photos']['type']."<br />";
-//		echo "size: ".$_FILES['photos']['size']."<br />";
-//		echo "Stored in: ". $_FILES["photos"]["tmp_name"]."<br />";
-
-	}
-
-*/
-
-
-
 ?> 

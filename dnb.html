@@ -7,7 +7,31 @@ Note: A Sass implementation can make this easier. Please look into that if you c
 -->
     <head>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-
+		<script>
+		
+			function updateComments(item_id){
+					var updateCommentRequest;
+					
+					try{
+						updateCommentRequest = new XMLHttpRequest();
+					}
+					catch(e){
+							// For Internet Explorer Browser
+						 try{
+						      updateCommentRequest = new ActiveXObject("Msxml2.XMLHTTP");
+						   }catch (e) {
+						      try{
+						         updateCommentRequest = new ActiveXObject("Microsoft.XMLHTTP");
+						      }catch (e){
+						         // Something went wrong
+						         alert("For better performance use either chrome or firefox");
+						         return false;
+						      }
+						   }
+					}
+			}
+			
+		</script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 

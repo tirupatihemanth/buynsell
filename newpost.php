@@ -1,65 +1,62 @@
 <?php
 require_once 'functions.php';
 session_start ();
-sessionCheck();
+sessionCheck ();
 ?>
 <html>
 <body>
 <?php
 include "dnb.html";
 
-$connectionObject = getConnection();
+$connectionObject = getConnection ();
 if (isset ( $_POST ['post'] )) {
-	echo $_POST['category'];
+	// print_r($_POST['category']);
 	$error = 0;
 	include "upload_file.php";
 	if ($error == 0) {
 		
-		queryDB($connectionObject, "INSERT INTO items(item_name,price,description,reason,user_id) VALUE('{$_POST['item_name']}', '{$_POST['price']}', '{$_POST['description']}', '{$_POST['reason']}','{$_SESSION['user_id']}')");
+		queryDB ( $connectionObject, "INSERT INTO items(item_name,price,description,reason,user_id) VALUE('{$_POST['item_name']}', '{$_POST['price']}', '{$_POST['description']}', '{$_POST['reason']}','{$_SESSION['user_id']}')" );
 		
-		//$result = mysql_query ( "SELECT item_id FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC " );
-		$resultObject = queryDB($connectionObject,"SELECT item_id FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC "  );
+		$resultObject = queryDB ( $connectionObject, "SELECT item_id FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC " );
 		
-		$result = $resultObject->fetch_array();
-		//$result = mysql_fetch_array ( $result );
-		// print_r($result);
+		$result = $resultObject->fetch_array ();
 		$item_id = $result ['item_id'];
-		// echo $item_id;
-		$name = $_FILES ["photos"] ["name"];
-		$ext = end ( (explode ( ".", $name )) );
-		// $_FILES["photos"]["tmp_name"] = "".$_FILES["photos"]["tmp_name"].$_SESSION['user_id'].$item_id;
-		// echo "$_FILES['photos']['tmp_name']";
-		move_uploaded_file ( $_FILES ["photos"] ["tmp_name"], "photos_items/" . $_SESSION ['user_id'] . $item_id . "." . $ext );
 		
+		for($i=0;$i<sizeof($_FILES["photos"]["name"]);$i++){
+			$ext = end((explode("/", $_FILES["photos"]["type"][$i])));
+			move_uploaded_file($_FILES["photos"]["tmp_name"][$i],"photos_items/".$_SESSION['user_id'].$item_id.$i.".".$ext);
+		}
+		//print_r($_POST['category']);
+		echo "<br />";
 		if (isset ( $_POST ['category'] )) {
+			$tags = Array();
+			$resultObject = queryDB($connectionObject, "SELECT * FROM tags");
 			
-			queryDB($connectionObject, $query);
-			for($i = 0; $i < 7; $i ++) {
+			for($i=0;$i<$resultObject->num_rows;$i++){
+				$result = $resultObject->fetch_array();
+				$tags[$result[1]] = $result[0];
+			}
+			$query = "";
+			
+			//Using multi query to decrease the number of data base access
+			
+			for($i = 0; $i < 12; $i ++) {
 				if (isset ( $_POST ['category'] [$i] )) {
-					// echo $_POST['category'][$i];
-					
-					$result = mysql_query ( "SELECT tag_id FROM tags WHERE tag_name = '{$_POST['category']}'" );
-					
-					if (! $result)
-						die ( "mysql_query error has occured" . mysql_error () );
-					
-					if (mysql_num_rows ( $result ) == 1) {
-						$result = mysql_fetch_array ( $result );
-						$tag_id = $result ['tag_id'];
-					} else
-						die ( "mysql_query error has occured" . mysql_error () );
-					
-					$result = mysql_query ( "INSERT INTO item_tags(item_id,tag_id) value('{$item_id}', '{$tag_id}')", $connection );
-					if (! $result)
-						die ( "mysql_query error has occured" . mysql_error () );
+					$query.= "INSERT INTO item_tags(item_id,tag_id) value('{$item_id}', '{$tags[$_POST['category'][$i]]}');";
 				}
 			}
+				
+			if(!$connectionObject->multi_query($query)){
+				die ( "Mysql query failed: " . $connectionObject->error );
+			}
+			
 		}
 	}
 	
-	if ($error == 0)
+	if ($error == 0){
 		echo "<span style= 'color:green'><b><br /><br /><br /><br />Your posts has been successfully posted. Check My posts or All posts to have a look at it</b></span>";
-	$connectionObject->close();
+	}
+	$connectionObject->close ();
 }
 
 ?>
@@ -90,10 +87,9 @@ if (isset ( $_POST ['post'] )) {
 			<table>
 				<tr>
 					<td><label><h3>
-								<b>Name Of Object:
+								<b>Name Of Object: 
 							
-							</h3>
-							</b></label></td>
+							</h3> </b></label></td>
 					<td><input class="fat " name="item_name" id="ex1" type="text"
 						placeholder=" Ad Title"></td>
 				</tr>
@@ -112,16 +108,32 @@ if (isset ( $_POST ['post'] )) {
 						<td><label for="sel1"><h3>
 									<b>Choose Category:</b>
 								</h3></label></td>
-						<td><select class="fat " name = "category" id="sel1" multiple>
-								<option>- - - - - - - - - - - - - - - - -</option>
-								<option>Electronics</option>
-								<option>Accessories</option>
-								<option>Mens Wear</option>
-								<option>Women's Wear</option>
-								<option>Books</option>
-								<option>Vehicles</option>
-								<option>More</option>
-						</select></td>
+						<td><input type="checkbox" name="category[]" value="academics">
+							Academics <br />
+							 <input type="checkbox" name="category[]"
+							value="books"> Books <br /> 
+							<input type="checkbox"
+							name="category[]" value="accessories"> Mobile Accessories <br />
+							
+							<input type="checkbox" name="category[]" value="mobiles"> Phones and Tablets
+							<br />
+							 <input type="checkbox" name="category[]" value="laptops">
+							Laptops <br /> <input type="checkbox" name="category[]"
+							value="electronics"> Electronics <br /> 
+							<input type="checkbox"
+							name="category[]" value="cosmetics"> Cosmetics <br />
+							 <input
+							type="checkbox" name="category[]" value="eatables"> Eatables <br />
+							
+							<input type="checkbox" name="category[]" value="fccoupons"> Food
+							Court Coupons <br /> 
+							<input type="checkbox" name="category[]"
+							vlaue="clothing"> Clothing <br /> 
+							<input type="checkbox"
+							name="category[]" value="cycles"> Cycles <br /> 
+							<input
+							type="checkbox" name="category[]" value="others"> Others <br />
+							</td>
 					</tr>
 				</div>
 			</table>
@@ -129,23 +141,25 @@ if (isset ( $_POST ['post'] )) {
 				<h3>Upload genuine photos of your product</h3>
 
 				<input id="button" style="width: 50%;" class=" btn btn-primary "
-					type="file" placeholder="Browse" name="photos"></input> <input
+					type="file" placeholder="Browse" name="photos[]"></input> 
+					
+					<input
 					id="button" style="width: 50%;" class=" btn btn-primary "
-					type="file" placeholder="Browse" name="photos"></input> <input
+					type="file" placeholder="Browse" name="photos[]"></input> 
+					
+					<input
 					id="button" style="width: 50%;" class=" btn btn-primary "
-					type="file" placeholder="Browse" name="photos"></input>
+					type="file" placeholder="Browse" name="photos[]"></input>
 
 				<h3>Brief Description:</h3>
 
-				<textarea
-					name="description"></textarea>
+				<textarea name="description"></textarea>
 				<!-- i wanna remove the(class = "ckeditor" id = "editor1") part-->
 				<script> CKEDITOR.replace('editor1');</script>
 
 				<h3>Specific reason for selling your product:</h3>
 
-				<textarea
-					name="reason"></textarea>
+				<textarea name="reason"></textarea>
 				<!-- i wanna remove the(class = "ckeditor" id = "editor2") part-->
 				<script> CKEDITOR.replace('editor2');</script>
 

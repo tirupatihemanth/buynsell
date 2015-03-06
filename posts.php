@@ -25,6 +25,27 @@ echo "</div></div>";
 echo"<br><br><br>";
 echo "<hr><div class='col-xs-12'>";
 $connectionObject = getConnection();
+$resultObject = "";
+if(isset($_GET['myposts']) && $_GET['myposts']==1){
+	
+	if(isset($_GET['tag_id'])){
+		$resultObject = queryDB($connectionObject, "SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND items.user_id = '{$_SESSION['user_id']}' AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC");
+	}
+	else{
+		$resultObject = queryDB($connectionObject, "SELECT * FROM items WHERE user_id = '{$_SESSION['user_id']}' ORDER BY timestamp DESC");
+	}
+	
+}
+else if(isset($_GET['allposts']) && $_GET['allposts']==1 && isset($_GET['tag_id'])){
+	
+	$resultObject = queryDB($connectionObject, "SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC");
+
+}
+else{
+	
+	$resultObject = queryDB($connectionObject, "SELECT * FROM items");
+}
+
 if(isset($_GET['myposts']) && $_GET['myposts'] == 1){
 
 
