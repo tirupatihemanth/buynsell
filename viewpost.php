@@ -9,6 +9,7 @@
 
 	include "dnb.html";
 	if(isset($_GET['item_id'])){
+
 		
 		$resultObject = queryDB($connectionObject, "SELECT items.*, userinfo.fullname, userinfo.id FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'");
 		$tagIdObject = queryDB($connectionObject, "SELECT tags.* FROM item_tags,tags where item_id = '{$_GET['item_id']}' AND tags.tag_id = item_tags.tag_id");
@@ -42,7 +43,7 @@
 		$resultObject = queryDB($connectionObject, "SELECT * FROM tags");
 			
 		for($i=0;$i<$resultObject->num_rows;$i++){
-			$result = $resultObject->fetch_array();
+			$result = $resultObject->fetch_array(); 
 			$tagNames[$result[0]] = $result[1];
 		}
 		echo "<ul>";
@@ -62,4 +63,3 @@
 		echo "Nothing to see here, Move Along :)";
 	}
 	
-?>

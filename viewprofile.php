@@ -10,6 +10,10 @@
 <?php
 	//include "header.php";
 	include "dnb.html";
+?>
+<div class = 'col-xs-10 col-xs-offset-1'>
+
+<?php
     $connection = mysql_connect($WEBHOST,$USER,$PASSWORD);
 	if(!$connection){
 		die("Mysql connection to the database failed ".Mysql_error());
@@ -63,3 +67,4 @@
 	";
 	mysql_close($connection);
 ?>
+</div>

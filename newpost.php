@@ -60,114 +60,85 @@ if (isset ( $_POST ['post'] )) {
 }
 
 ?>
-		<div id="container">
-		<h1>
-			<b><u>NEW POST</u></b>
-		</h1>
-
+		<div id="container" class='col-xs-10 col-xs-offset-1'>
+		<h2>Post a New Ad</h2>
+        <hr>
 		<div>
-			<h3>
-				<b>Suggestions:</b>
-			</h3>
-			<h3>
+			<h4>
+				<h5><b>Suggestions:</b></h5>
+			<small>
 				<ul>
 					<li>Try to be precise in giving description and reasons for
 						selling.</li>
 					<li>Please choose the appropriate tags so that we can show the most
-						relavant information to the buyers
+						relavant information to the buyers (Use ctrl+click for multiple tags)
 			
-			</h3>
 			</li>
 			</ul>
-			</h3>
+            </small>
+            </h4>
 		</div>
 		<hr>
-		<form method="post" role="form" action="newpost.php"
+            <form method="post" role="form" action="newpost.php"
 			enctype="multipart/form-data">
-			<table>
-				<tr>
-					<td><label><h3>
-								<b>Name Of Object: 
-							
-							</h3> </b></label></td>
-					<td><input class="fat " name="item_name" id="ex1" type="text"
-						placeholder=" Ad Title"></td>
-				</tr>
-
-				<tr>
-					<td><label for="ex2"><h3>
-								<b>Selling Price(in Rs):<b>
-							
-							</h3></label></td>
-					<td><input class="fat " type="text" name="price" class="input-lg  "
-						id="ex2" placeholder="  Ruppees"></td>
-				</tr>
-
+			
+              <div class='col-md-6 col-xs-12'>
+              <div class="form-group">
+                <label for="InputItemName">Item Name</label>
+                <input type="text" class="form-control" name="item_name" id="InputItemName" placeholder="Enter Item Name">
+              </div>
+              <div class="form-group">
+                <label for="InputItemCost">Item Cost</label>
+                <input type="text" class="form-control" name="price" id="InputItemCost" placeholder="In Rs.">
+              </div>
+              <div class="form-group">
+				<label for="InputCategory">Choose Category</label>
+				<select class="form-control" name="category[]" id="sel1" multiple>
+								<option value="academics"> Academics </option>
+								<option value="eatables">Eatables</option>
+								<option value="fccoupons">Food Court Coupons</option>
+								<option value="cosmetics">Cosmetics</option>
+								<option value="electronics">Electronics</option>
+								<option value="laptops">Laptops</option>
+								<option value="mobiles">Mobiles</option>
+								<option value="accessories">Mobile Accessories</option>
+								<option value="clothing">Clothing</option>
+								<option value="books">Books</option>
+								<option value="cycles">Cycles</option>
+								<option value="categories">Other Catgories</option>
+				</select>
+              </div>
+              <div class="form-group">
+                <p class="help-block">Please upload a maximum of 3 good quality photographs of the Item</p>
+                <label for="InputPic1">Upload Picture 1:</label>
+                <input type="file" name="photos[]" id="InputPic1">
+              </div>
+              <div class="form-group">
+                <label for="InputPic2">Upload Picture 2:</label>
+                <input type="file" name="photos[]" id="InputPic2">
+              </div>
+              <div class="form-group">
+                <label for="InputPic3">Upload Picture 3:</label>
+                <input type="file" name="photos[]" id="InputPic3">
+              </div>
+                  </div>
+                <div class='col-md-6 col-xs-12'>
 				<div class="form-group">
-					<tr>
-						<td><label for="sel1"><h3>
-									<b>Choose Category:</b>
-								</h3></label></td>
-						<td><input type="checkbox" name="category[]" value="academics">
-							Academics <br />
-							 <input type="checkbox" name="category[]"
-							value="books"> Books <br /> 
-							<input type="checkbox"
-							name="category[]" value="accessories"> Mobile Accessories <br />
-							
-							<input type="checkbox" name="category[]" value="mobiles"> Phones and Tablets
-							<br />
-							 <input type="checkbox" name="category[]" value="laptops">
-							Laptops <br /> <input type="checkbox" name="category[]"
-							value="electronics"> Electronics <br /> 
-							<input type="checkbox"
-							name="category[]" value="cosmetics"> Cosmetics <br />
-							 <input
-							type="checkbox" name="category[]" value="eatables"> Eatables <br />
-							
-							<input type="checkbox" name="category[]" value="fccoupons"> Food
-							Court Coupons <br /> 
-							<input type="checkbox" name="category[]"
-							vlaue="clothing"> Clothing <br /> 
-							<input type="checkbox"
-							name="category[]" value="cycles"> Cycles <br /> 
-							<input
-							type="checkbox" name="category[]" value="others"> Others <br />
-							</td>
-					</tr>
-				</div>
-			</table>
-			<div style="margin: 10px;">
-				<h3>Upload genuine photos of your product</h3>
-
-				<input id="button" style="width: 50%;" class=" btn btn-primary "
-					type="file" placeholder="Browse" name="photos[]"></input> 
-					
-					<input
-					id="button" style="width: 50%;" class=" btn btn-primary "
-					type="file" placeholder="Browse" name="photos[]"></input> 
-					
-					<input
-					id="button" style="width: 50%;" class=" btn btn-primary "
-					type="file" placeholder="Browse" name="photos[]"></input>
-
-				<h3>Brief Description:</h3>
-
-				<textarea name="description"></textarea>
-				<!-- i wanna remove the(class = "ckeditor" id = "editor1") part-->
-				<script> CKEDITOR.replace('editor1');</script>
-
-				<h3>Specific reason for selling your product:</h3>
-
-				<textarea name="reason"></textarea>
-				<!-- i wanna remove the(class = "ckeditor" id = "editor2") part-->
-				<script> CKEDITOR.replace('editor2');</script>
-
+                	<label for="editor1">Brief Description:</label>
+                    <textarea class="form-control" name="description" id='editor1'></textarea>
+                </div>
+                <div class="form-group">
+				    <label for="editor2">Reason for Selling:</label>
+                    <textarea class="form-control" name="reason" id='editor2'></textarea>
+                </div>
+                
 				</br>
-				<button id="button" type="submit" class="btn btn-primary btn-lg"
+				<button type="submit" class="btn btn-primary btn-lg"
 					name="post" value="post">POST</button>
-			</div>
-		</form>
+                </div>
+            </form>
+            
+		
 	</div>
 </body>
 </html>

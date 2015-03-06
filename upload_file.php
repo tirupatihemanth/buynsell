@@ -1,7 +1,8 @@
 <?php
 
 	$validextns = array("gif","jpeg","jpg","png");
-	//print_r($_FILES['photos']['tmp_name']);
+	//print_r($_FILES['photos']['name']);
+	
 	
 	for($j = 0;$j<3;$j++){
 		for($i=0;$i<sizeof($_FILES['photos']['name']);$i++){
