@@ -15,6 +15,10 @@
 	include "dnb.html";
 	if(isset($_GET['item_id'])){
 		$resultObject = queryDB($connectionObject, "SELECT items.*, userinfo.fullname FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'");
+        ?>
+<div class = 'col-xs-10 col-xs-offset-1'>
+    <div class='col-xs-6'>
+<?php
 		//$result = mysql_query("SELECT * FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'",$connection);
 // 	if(!$result)
 // 		die("Mysql query error ".mysql_error());
@@ -35,9 +39,13 @@
 // 	echo "Hostel: ".$product['hostel']."<br /><br />";
 // 	echo "Room No.: ".$product['roomno']."<br /><br />";
 // 	echo "<a href='photos_items/".$product['user_id'].$_GET['item_id']."'><img src='photos_items/".$product['user_id'].$_GET['item_id']."' alt='404' height='200px' width='200px'></a>";
-}
-
+}?>
+</div>
+    <div class='col-xs-6'>
+<?php    
 echo "<p style = 'color:red'>Caution: The info in this page is as provided by the seller and buynsell or Insti Webops have no responsibility over the quality of the products</p>";
 $array['item_id'] = $_GET['item_id'];
 include "comments.php";
 ?>
+        </div>
+    </div>

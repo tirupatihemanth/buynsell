@@ -27,7 +27,7 @@
 	<script src = "./ckeditor/ckeditor.js"></script>
     </head>
     <body>';
-	require_once 'header.php';
+	require_once 'dnb.html';
 	if ($result ['fullname'] == "")
 		echo "<br /><br />BUYNSELL@IITM WELCOMES " . $_SESSION ['user_rollno'];
 	else
