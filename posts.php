@@ -100,6 +100,7 @@ else if(isset($_GET['allposts']) && $_GET['allposts'] == 1){
   if(isset($_GET['tag_id'])){
   	$resultObject = queryDB($connectionObject, "SELECT * FROM items,item_tags WHERE items.item_id = item_tags.item_id AND item_tags.tag_id = '{$_GET['tag_id']}' ORDER BY timestamp DESC");
   	$rows = $resultObject->num_rows;
+    
     if( $rows == 0)
       echo "<span>Nothing to see here move along :)</span>";
     else{
