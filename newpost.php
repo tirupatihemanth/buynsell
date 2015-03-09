@@ -60,7 +60,7 @@ if (isset ( $_POST ['post'] )) {
 }
 
 ?>
-		<div id="container" class='col-xs-10 col-xs-offset-1'>
+		<div class='container col-xs-10 col-xs-offset-1'>
 		<h2>Post a New Ad</h2>
         <hr>
 		<div>
@@ -95,17 +95,15 @@ if (isset ( $_POST ['post'] )) {
 				<label for="InputCategory">Choose Category</label>
 				<select class="form-control" name="category[]" id="sel1" multiple>
 								<option value="academics"> Academics </option>
-								<option value="eatables">Eatables</option>
-								<option value="fccoupons">Food Court Coupons</option>
-								<option value="cosmetics">Cosmetics</option>
+								<option value="coupons">Coupons</option>
 								<option value="electronics">Electronics</option>
 								<option value="laptops">Laptops</option>
 								<option value="mobiles">Mobiles</option>
-								<option value="accessories">Mobile Accessories</option>
-								<option value="clothing">Clothing</option>
-								<option value="books">Books</option>
+								<option value="stationery">Stationery</option>
+								<option value="others">Clothing</option>
+								<option value="academics">Books</option>
 								<option value="cycles">Cycles</option>
-								<option value="categories">Other Catgories</option>
+								<option value="others">Other Catgories</option>
 				</select>
               </div>
               <div class="form-group">

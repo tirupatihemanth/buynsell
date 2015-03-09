@@ -30,7 +30,7 @@ if (isset ( $_GET ['allposts'] ) && $_GET ['allposts'] == 1) {
 }
 
 if (isset ( $_GET ['myposts'] ) && $_GET ['myposts'] == 1) {
-	echo "<form method = 'post' action = 'viewpost.php?myposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'pubcomment'></textarea><input type='submit' name = 'pubsubmit' value = 'comment'></form>";
+	echo "<form method = 'post' action = 'viewpost.php?myposts=1&item_id=" . $array ['item_id'] . "'><textarea class='form-control' rows='1' name = 'pubcomment'></textarea><button class='btn btn-default' type='submit' name = 'pubsubmit' value = 'comment'>Submit</button</form>";
 }
 //onClick='updateComments(".$array['item_id'].")'
 

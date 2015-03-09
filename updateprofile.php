@@ -72,12 +72,12 @@ $connectionObject->close();
 <title>Update Profile | BUYNSELL@IITM</title>
 </head>
 <body>
-	<div class="col-xs-8 col-xs-offset-2">
-		<h1>Update Your profile So that other people who buy your products can
-			easily reach you</h1>
+	<div class="col-xs-10 col-xs-offset-1 container">
+		<h4>Update Your profile So that other people who buy your products can
+			easily reach you</h4>
     <?php
 				if (isset ( $_GET ['firsttime'] ) && $_GET ['firsttime'] == 1) {
-						echo "<span style = 'color:green'><b> Seems Like You Are logging in for the first time BUYNSELL@IITM WELCOMES YOU :)<br />Please Update Your profile So that other people can know more about you<br /></b></span>";
+						echo "<div class='alert alert-warning'><b> Seems Like You Are logging in for the first time! Welcome to Buy & Sell<br />Please Update Your profile so that other people can know more about you<br /></b></div>";
 				}
 				?>
     <form method="post" action="updateprofile.php">
@@ -98,7 +98,7 @@ $connectionObject->close();
     
     <?php
 				if ($profileupdate == 1)
-					echo "<span style = 'color:green'> Your profile update is successful :)</span><br />";
+					echo "<div class='alert alert-success'> Your profile update is successful.</div><br />";
 				?>
     
 <!--     <form method="post" action="updateprofile.php"> -->

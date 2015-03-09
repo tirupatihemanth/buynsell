@@ -1,4 +1,11 @@
- <?php
+<html>
+    <head>
+	<link href="stylesheets/css_afterlogin.css" rel = "stylesheet" type = "text/css"/>
+	<title>BUY&SELL@IITM</title>	
+	<script src = "./ckeditor/ckeditor.js"></script>
+    </head>
+    <body> 
+<?php
 	require_once 'functions.php';
 	session_start ();
 	sessionCheck ();
@@ -20,26 +27,23 @@
 		$_SESSION ['user_fullname'] = $_SESSION ['user_rollno'];
 	}
 	
-	echo '<html>
-    <head>
-	<link href="stylesheets/css_afterlogin.css" rel = "stylesheet" type = "text/css"/>
-	<title>BUY&SELL@IITM</title>	
-	<script src = "./ckeditor/ckeditor.js"></script>
-    </head>
-    <body>';
 	require_once 'dnb.html';
-	if ($result ['fullname'] == "")
-		echo "<br /><br />BUYNSELL@IITM WELCOMES " . $_SESSION ['user_rollno'];
-	else
-		echo "BUYNSELL@IITM WELCOMES " . $result ['fullname'];
 	
-	echo '<div class="col-xs-8 col-xs-offset-2">
+	
+	echo '<div class="col-xs-10 col-xs-offset-1 container">';
+if ($result ['fullname'] == "")
+		echo "<br><div class='jumbotron'><h3>Welcome " . $_SESSION ['user_rollno']."<br></h3><br>We recommend updating your profile. You can do so from your profile settings at the top right corner.";
+	else
+		echo "<br><div class='jumbotron'><h3>Nice to see you again, " . $result ['fullname']."!</h3>";
+echo '
 	<h4>
-	    ...A Site For IITM Junta
+	   This is Buy & Sell - IIT Madras
 	</h4>
-	<p>We thank you for joining our project of making the Life At IITM more peaceful!!!</p>
-	<p>You have some unused products and would like to sell them It\'s simple now.  Post Below:</p>
-	<p>We would like to Introduce to our all new news feed. This feed contans some important notifications such as comments on your posts and also private messages sent to you</p>
+	<p>You have some unused products and would like to sell them It\'s simple now. Start by posting a new ad using the link above.</p>
+	<p>You will also find your notifications below. This feed contans notifications such as comments on your posts and also private messages sent to you</p>
+    	<p>We thank you for joining our project and helping us in our efforts to make this a successful endeavor.</p>
+
+    <p>Happy Hunting!</p></div>
 	<h3>Public comments on your posts</h3>';
 	
 	$pubcommentsObject = queryDB ( $connectionObject, "SELECT comments.user_com_id,comments.message,userinfo.rollno FROM items, comments, userinfo WHERE items.item_id = comments.item_id AND items.user_id = '{$result['id']}' AND userinfo.id = comments.user_com_id AND visibility = 1" );

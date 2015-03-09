@@ -11,18 +11,20 @@ include 'dnb.html';
     <body>
         
         
-        <div class='content col-xs-10 col-xs-offset-1'>
+        <div class='container col-xs-10 col-xs-offset-1'>
             <!--Insert content replacing the para and heading below-->
 
-<div class='col-xs-12'><div class='col-xs-12'><h4 style='background-color:#505050;color:white;padding:10px;'>Top Deals</h4><hr>
+<!--<div class='col-xs-12'><div class='col-xs-12'><h4 style='background-color:#505050;color:white;padding:10px;'>Top Deals</h4><hr>
+
+Don't Delete-->
 
 <?php
-include "carousal.php";
-echo "<div class='col-xs-4 wrap_offer'>";
-include "offers.php";
-echo "</div></div>";
+//include "carousal.php";
+//echo "<div class='col-xs-4 wrap_offer'>";
+//include "offers.php";
+//echo "</div></div>";
 
-echo"<br><br><br>";
+echo"<br>";
 echo "<hr><div class='col-xs-12'>";
 $connectionObject = getConnection();
 $resultObject = "";
@@ -65,7 +67,16 @@ if(isset($_GET['myposts']) && $_GET['myposts'] == 1){
         echo "<a href='viewpost.php?myposts=1&item_id=".$array['item_id']."'>";
         echo "<div class='item col-xs-3'><div class='item_details'>";
         echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
-        echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
+          $src = "photos_items/".$array['user_id'].$array['item_id']."0";
+            if(file_exists($src.".jpeg")){
+                    echo "<a href='viewpost.php?myposts=1&item_id=".$array['item_id']."'><img src=".$src.".jpeg  class='thumbnail center-block col-xs-12'/></a>";
+                }
+                else if(file_exists($src.".gif")){
+                    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'><img src=".$src.".gif  class='thumbnail center-block col-xs-12'/></a>";
+                }
+                else if(file_exists($src.".png")){
+                    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'><img src=".$src.".png  class='thumbnail center-block col-xs-12'/></a>";
+            }
         echo "<span class='center-block'><p class='text-center price'>Rs. ".$array['price']."</p></span></div></div>";
         echo "</a>";	
       }
@@ -83,8 +94,17 @@ if(isset($_GET['myposts']) && $_GET['myposts'] == 1){
       echo "<a href = 'viewpost.php?myposts=1&item_id=".$array['item_id']."'>";
       echo "<div class='item col-xs-3'><div class='item_details'>";
       echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
-      echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
-      echo "<span class='center-block'><p class='text-center price'>Rs. ".$array['price']."</p></span></div></div>";
+      $src = "photos_items/".$array['user_id'].$array['item_id']."0";
+            if(file_exists($src.".jpeg")){
+                    echo "<a href='viewpost.php?myposts=1&item_id=".$array['item_id']."'><img src=".$src.".jpeg  class='thumbnail center-block col-xs-12'/></a>";
+                }
+                else if(file_exists($src.".gif")){
+                    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'><img src=".$src.".gif  class='thumbnail center-block col-xs-12'/></a>";
+                }
+                else if(file_exists($src.".png")){
+                    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'><img src=".$src.".png  class='thumbnail center-block col-xs-12'/></a>";
+            }
+        echo "<span class='center-block'><p class='text-center price'>Rs. ".$array['price']."</p></span></div></div>";
       echo "</a>";
 
     }
@@ -109,8 +129,17 @@ else if(isset($_GET['allposts']) && $_GET['allposts'] == 1){
         echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'>";
         echo "<div class='item col-xs-3'><div class='item_details'>";
         echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
-        echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
-        echo "<span class='center-block'><p class='text-center price'>Rs. ".$array['price']."</p></span>";
+        $src = "photos_items/".$array['user_id'].$array['item_id']."0";
+            if(file_exists($src.".jpeg")){
+                    echo "<a href='viewpost.php?myposts=1&item_id=".$array['item_id']."'><img src=".$src.".jpeg  class='thumbnail center-block col-xs-12'/></a>";
+                }
+                else if(file_exists($src.".gif")){
+                    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'><img src=".$src.".gif  class='thumbnail center-block col-xs-12'/></a>";
+                }
+                else if(file_exists($src.".png")){
+                    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'><img src=".$src.".png  class='thumbnail center-block col-xs-12'/></a>";
+            }
+          echo "<span class='center-block'><p class='text-center price'>Rs. ".$array['price']."</p></span>";
        
 /*        echo "</div><div class='user_details'><span style = 'color:blue'><b>User Details:<br /></b></span>";
          $resultObject = queryDB($connectionObject, "SELECT * FROM userinfo WHERE id = '{$array['user_id']}'");
@@ -135,8 +164,17 @@ else if(isset($_GET['allposts']) && $_GET['allposts'] == 1){
       echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'>";
       echo "<div class='item col-xs-3'><div class='item_details'>";
       echo "<span class='text-center'><h4> ".$array['item_name']."</h4></span><br />";
-      echo "<img class='center-block' src='photos_items/".$array['user_id'].$array['item_id']."' alt='404' height='200px' width='200px'>";
-      echo "<span class='center-block'><p class='text-center price'>Rs. ".$array['price']."</p></span>";
+      $src = "photos_items/".$array['user_id'].$array['item_id']."0";
+            if(file_exists($src.".jpeg")){
+                    echo "<a href='viewpost.php?myposts=1&item_id=".$array['item_id']."'><img src=".$src.".jpeg  class='thumbnail center-block col-xs-12'/></a>";
+                }
+                else if(file_exists($src.".gif")){
+                    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'><img src=".$src.".gif  class='thumbnail center-block col-xs-12'/></a>";
+                }
+                else if(file_exists($src.".png")){
+                    echo "<a href = 'viewpost.php?allposts=1&item_id=".$array['item_id']."'><img src=".$src.".png  class='thumbnail center-block col-xs-12'/></a>";
+            }
+        echo "<span class='center-block'><p class='text-center price'>Rs. ".$array['price']."</p></span>";
 
 /*      echo "</div><div class='user_details'><span style = 'color:blue'><b>User Details:<br /></b></span>";
        $resultObject = queryDB($connectionObject, "SELECT * FROM userinfo WHERE id = '{$array['user_id']}'");
