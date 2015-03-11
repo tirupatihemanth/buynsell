@@ -21,16 +21,16 @@ for($com = 0; $com < $rows; $com ++) {
 
 echo "</div>";
 
-if (isset ( $_GET ['allposts'] ) && $_GET ['allposts'] == 1) {
+//if (isset ( $_GET ['allposts'] ) && $_GET ['allposts'] == 1) {
 	
 	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'pubcomment'></textarea><input type='submit'name = 'pubsubmit' value = 'comment'></form>";
 	echo "<span style = 'color:green'>Send A Private Message To the Seller(can be seen only by seller)</span><br />";
-	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'privcomment'></textarea><input id = 'pubsubmit' type='submit' name = 'privsubmit' value = 'privcomment'></form>";
-}
+	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'privcomment'></textarea><input id = 'privsubmit' type='submit' name = 'privsubmit' value = 'privcomment'></form>";
+//}
 
-if (isset ( $_GET ['myposts'] ) && $_GET ['myposts'] == 1) {
-	echo "<form method = 'post' action = 'viewpost.php?myposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'pubcomment'></textarea><input type='submit' name = 'pubsubmit' value = 'comment'></form>";
-}
+// if (isset ( $_GET ['myposts'] ) && $_GET ['myposts'] == 1) {
+// 	echo "<form method = 'post' action = 'viewpost.php?myposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'pubcomment'></textarea><input type='submit' name = 'pubsubmit' value = 'comment'></form>";
+// }
 //onClick='updateComments(".$array['item_id'].")'
 
 ?> 

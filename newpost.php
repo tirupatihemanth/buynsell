@@ -24,7 +24,7 @@ if (isset ( $_POST ['post'] )) {
 		
 		for($i=0;$i<sizeof($_FILES["photos"]["name"]);$i++){
 			$ext = end((explode("/", $_FILES["photos"]["type"][$i])));
-			move_uploaded_file($_FILES["photos"]["tmp_name"][$i],"photos_items/".$_SESSION['user_id'].$item_id.$i.".".$ext);
+			move_uploaded_file($_FILES["photos"]["tmp_name"][$i],"photos_items/".$item_id.$i.".".$ext);
 		}
 		//print_r($_POST['category']);
 		echo "<br />";

@@ -9,9 +9,8 @@
 
 	include "dnb.html";
 	if(isset($_GET['item_id'])){
-
 		
-		$resultObject = queryDB($connectionObject, "SELECT items.*, userinfo.fullname, userinfo.id FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'");
+		$resultObject = queryDB($connectionObject, "SELECT items.*, userinfo.fullname FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'");
 		$tagIdObject = queryDB($connectionObject, "SELECT tags.* FROM item_tags,tags where item_id = '{$_GET['item_id']}' AND tags.tag_id = item_tags.tag_id");
 		$product = $resultObject->fetch_array(MYSQL_BOTH);
 		echo "<br />";
@@ -20,15 +19,15 @@
 		
 		echo "<h3>Images</h3>";
 		for($i=0;$i<2;$i++){
-			$src = "photos_items/".$product['id'].$product['item_id'].$i;
+			$src = "photos_items/".$product['item_id'].$i;
 			if(file_exists($src.".jpeg")){
-				echo "<img src=".$src.".jpeg style='width:256px;height:256px' />";
+				echo "<img src=".$src.".jpeg style='width:256px;height:256px' /><br />";
 			}
 			else if(file_exists($src.".gif")){
-				echo "<img src=".$src.".gif style='width:256px;height:256px'/>";
+				echo "<img src=".$src.".gif style='width:256px;height:256px'/><br />";
 			}
 			else if(file_exists($src.".png")){
-				echo "<img src=".$src.".png style='width:256px;height:256px'/>";
+				echo "<img src=".$src.".png style='width:256px;height:256px'/><br />";
 			}
 		}
 		
