@@ -17,7 +17,7 @@
 		$user_id = $_SESSION['user_id'];
 		$userinfoObject = queryDB($connectionObject,"SELECT * FROM userinfo WHERE id = '{$_SESSION['user_id']}'");
 		$userarray = $userinfoObject->fetch_array();
-		print_r($_SESSION);
+		//print_r($_SESSION);
 		echo "<br /><br /><br /><br /><a href = 'updateprofile.php'>Update Profile</a><br /><br />";
 	}
 	else{
@@ -25,7 +25,7 @@
 		$userinfoObject = queryDB($connectionObject, "SELECT * FROM userinfo WHERE id = '{$_GET['user_id']}'" );
 		$userarray = $userinfoObject->fetch_array();
 		$otherProfile = 1;
-		echo "<br /><br /><br /><br />";
+		echo "<br /><br /><br /><br />"; 
 	}
 	
 	if(isset($_POST['privmessagesubmit'])){

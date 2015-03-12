@@ -24,6 +24,7 @@ echo "</div></div>";
 
 echo"<br><br><br>";
 echo "<hr><div class='col-xs-12'>";
+
 $connectionObject = getConnection();
 $resultObject = "";
 if(isset($_GET['myposts']) && $_GET['myposts']==1){
@@ -48,7 +49,7 @@ else{
 }
 
 echo "<h4 style='background-color:#505050;color:white;padding:10px;'>Your Posts</h4>";
-
+include 'mini_menu.php';
 $rows = $resultObject->num_rows;
 
 if($rows == 0)
