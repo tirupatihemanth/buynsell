@@ -8,7 +8,7 @@
 
 <?php
 	include "db.php";
-	include "header.php";
+	include "dnb.html";
 	if(isset($_POST['feedback'])){
 		$connection = mysqli_connect($WEBHOST,$USER,$PASSWORD,$DATABASE);
 		if(!$connection)
@@ -17,29 +17,35 @@
 		if(!$result){
 			die("mysql query over the database error has occured ".Mysql_error());
 		}
-		echo "<br /><br /><br /><br /><span style = 'color:green'>Thank You For Your Valuable feedback We will surely look into it :)</span>";
+		echo "<br /><br /><div class='alert alert-success'>Thank you for your valuable feedback! We will surely look into it ASAP. Mother Promise!</span>";
 	}
 ?>
 <html>
-	<script src = "./ckeditor/ckeditor.js"></script>
 	<body>
+        <div class='container col-xs-10 col-xs-offset-1'>
 		<br /><br /><br /><br />
-		<p>We at WebOps are really enthusiastic to listen to your suggestions to make this site help you more. Kindly put it in your valuable feedback here.</p>
-
+		
+            <div class='col-xs-10 col-xs-offset-1'>
+                <div class='jumbotron'><h4>Hi,</h4><h3><small> We at WebOps are really enthusiastic to listen to your suggestions to make this site better. And we would be really happy if you could take some time off to give us your feedback below</small><br></h3></div>
 			<form method = POST action = feedback.php>
 
-				<p>Do You think this the page is user friendly?</p>
-				<input type = "radio" name = "ufriendly" value = "yes">YES</input>
-				<input type = "radio" name = "ufriendly" value = "no">NO</input>
-				<p>If you find any bugs or any problems with the functionality of the site put them below:</p>	
-				<textarea class = "ckeditor" id = "editor1" name = "bugs"></textarea>
-	    		<script> CKEDITOR.replace('editor1');</script>
-	    		<p>If you can think of some improvements to the site put them below:</p>
-	    		<textarea class = "ckeditor" id = "editor2" name = "improvements"></textarea>
-	    		<script> CKEDITOR.replace('editor2');</script>
+				<p>1. Do you find this page user friendly?</p>
+				<input type = "radio" name = "ufriendly" value = "yes"> Yes</input>
+				<input type = "radio" name = "ufriendly" value = "no"> No</input><br>
+				<p>2. If you find any bugs or any problems with the functionality of the site please send the details below:</p>
+				<textarea class = "form-control" id = "editor1" name = "bugs"></textarea><br>
+	    		<p>3. If you can think of some improvements to the site put them below:</p>
+	    		<textarea class = "form-control" id = "editor2" name = "improvements"></textarea>
 	    		<br />
-	    		<input type = submit name = "feedback" value = "Submit" ></submit>
+	    		<button class='btn btn-default' type = submit name = "feedback" value = "Submit" >Send</button>
 			</form>
-			for any other queries please drop a mail to IstituteWebops@gmail.com
+            <br>
+            <div class='alert alert-warning'>
+			For any other queries please drop a mail to instituteWebops@gmail.com
+        </div>
+    </div>
+<br><br>
+    
+</div>
 	</body>
 </html>

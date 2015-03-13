@@ -8,6 +8,18 @@
 	$connectionObject = getConnection();
 
 	include "dnb.html";
+    if(isset($_POST['order'])){
+        $resultObject = queryDB ( $connectionObject, "SELECT * from userinfo WHERE rollno = '{$_SESSION['user_rollno']}'" );
+	    $result = $resultObject->fetch_array ( MYSQLI_BOTH );
+        
+        if (strlen ( $result ['fullname'] ) == 0 || strlen ($result ['hostel'])  == 0) {echo "<div class='alert alert-danger'>Please update your profile with your full name, hostel and room number to avail this offer</div>";} else{
+        if($_POST['number']<3){
+        $insert = "INSERT INTO special VALUES ('".$result['fullname']."','".$result['rollno']."','".$result['hostel']."','".$_POST['size']."','".$_POST['number']."','".$result['roomno']."')";
+        $in = queryDB ( $connectionObject, $insert);
+        echo "<div class='alert alert-success'>Thank you. Your order has been completed.</div>";
+        }else{echo "<div class='alert alert-danger'>You can only order a maximum of two t-shirts</div>";}
+        }
+    }
 	if(isset($_GET['item_id'])){
 		
 		$resultObject = queryDB($connectionObject, "SELECT items.*, userinfo.fullname FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'");
@@ -68,7 +80,7 @@
     <div class="col-md-4 col-xs-12">
         <?php
             echo "<h4>Images</h4>";
-            $src = "photos_items/".$product['item_id']."0";
+            $src = "photos_items/special";
             if(file_exists($src.".jpeg")){
                     echo "<a href='".$src.".jpeg'><img src=".$src.".jpeg class='col-xs-8'/></a>";
                 }
@@ -82,7 +94,7 @@
         <div class='col-xs-4'>
             <?php
                 for($i=0;$i<3;$i++){
-                $src = "photos_items/".$product['item_id'].$i;
+                $src = "photos_items/special".$i;
                 if(file_exists($src.".jpeg")){
                     echo "<a href='".$src.".jpeg'><img src=".$src.".jpeg class='col-xs-12'/></a>";
                 }
@@ -125,14 +137,53 @@
     </div>
     <div class="col-xs-12 col-md-8">
         <div class="col-xs-4"><h3>Rs. <?php echo $product['price'];?> </h3></div>
-        <div class="col-xs-8"><h4>Contact Seller:<br></h4><?php echo "<a href =viewprofile.php?user_id=".$product['user_id'].">".$product['fullname']."</a>"; ?></div>
+        <div class="col-xs-8"><h4>Contact Seller:<br></h4>Admin</div>
         <div class="col-xs-12">
         <hr><h4>Reason for Selling<br><small><?php echo $product['reason']; ?></small></h4><hr>
 
         <?php		
 		$array['item_id'] = $_GET['item_id'];
-		include "comments.php";
+		//include "comments.php";
         ?>
+        <div class='alert alert-warning'>Please note that you can order only once. Any multiple order will not be recorded.</div>
+        <form method="post" action="<?php echo $_SERVER["PHP_SELF"]."?item_id=00";?>">
+          
+            <div class="radio">
+              <label>
+                <input type="radio" name="size" id="optionsRadios1" value="S" checked>
+                S
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="size" id="optionsRadios2" value="M">
+                M
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="size" id="optionsRadios3" value="L" checked>
+                L
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="size" id="optionsRadios4" value="XL">
+                XL
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="size" id="optionsRadios5" value="XXL">
+                XXL
+              </label>
+            </div>
+          <div class="form-group">
+            <label for="number">Number of T Shirts</label>
+            <input type="number" class="form-control" name='number' id="number" placeholder="Number (Maximum of 2)">
+          </div>
+          <button type="submit" name="order" values="order" class="btn btn-default">Complete Order</button>
+        </form>
         </div>
     </div>
 </div>

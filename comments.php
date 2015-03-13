@@ -5,32 +5,43 @@ if (isset ( $_POST ['pubsubmit'] )) {
 
 if (isset ( $_POST ['privsubmit'] )) {
 	queryDB ( $connectionObject, "INSERT INTO comments(user_com_id,item_id,visibility,message) value('{$_SESSION['user_id']}','{$array['item_id']}',0,'{$_POST['privcomment']}')" );
-	echo "<span style = 'background-color:green; color:white;'>message sent succesfully!!!</span><br />";
+	echo "<div class='alert alert-success'>Message sent succesfully</div><br />";
 }
 
-echo "<span style = 'color:green'>Public Comments(visible to all)</span><br />";
-$comments = queryDB ( $connectionObject, "SELECT comments.message,comments.user_com_id,userinfo.rollno FROM comments,userinfo WHERE item_id = '{$array['item_id']}' AND comments.user_com_id = userinfo.id AND visibility = 1 ORDER BY timestamp ASC" );
+$comments = queryDB ( $connectionObject, "SELECT comments.message,comments.user_com_id,comments.timestamp,userinfo.rollno FROM comments,userinfo WHERE item_id = '{$array['item_id']}' AND comments.user_com_id = userinfo.id AND visibility = 1 ORDER BY timestamp ASC" );
 $rows = $comments->num_rows;
-
-echo "<div id='comments'>";
-
+?>
+<h4>Public Comments <span class="badge"><?php echo $rows; ?></span></h4>
+<div>
+<?php
 for($com = 0; $com < $rows; $com ++) {
 	$comarray = $comments->fetch_array ();
-	echo "<span style = 'background-color: yellow'>" . ($com + 1) . ". <a href='viewprofile.php?user_id=" . $comarray ['user_com_id'] . "'>" . $comarray ['rollno'] . "</a> :  " . $comarray ['message'] . "</span><br />";
+	echo "<div class='well well-sm comments'><a href='viewprofile.php?user_id=" . $comarray ['user_com_id'] . "'>" . $comarray ['rollno'] . "</a>  " . $comarray ['message'] . "<br><h5><small>at ".$comarray ['timestamp']."</small></h5></div>";
 }
-
-echo "</div>";
+?>
+</div>
+<?php
 
 //if (isset ( $_GET ['allposts'] ) && $_GET ['allposts'] == 1) {
 	
-	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'pubcomment'></textarea><input type='submit'name = 'pubsubmit' value = 'comment'></form>";
-	echo "<span style = 'color:green'>Send A Private Message To the Seller(can be seen only by seller)</span><br />";
-	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'privcomment'></textarea><input id = 'privsubmit' type='submit' name = 'privsubmit' value = 'privcomment'></form>";
+
+//	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'pubcomment'></textarea><input type='submit'name = 'pubsubmit' value = 'comment'></form>";
+//	echo "<span style = 'color:green'>Send A Private Message To the Seller(can be seen only by seller)</span><br />";
+//	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'privcomment'></textarea><input id = 'privsubmit' type='submit' name = 'privsubmit' value = 'privcomment'></form>";
 //}
 
 // if (isset ( $_GET ['myposts'] ) && $_GET ['myposts'] == 1) {
 // 	echo "<form method = 'post' action = 'viewpost.php?myposts=1&item_id=" . $array ['item_id'] . "'><textarea name = 'pubcomment'></textarea><input type='submit' name = 'pubsubmit' value = 'comment'></form>";
 // }
+//=======
+	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea class='form-control' rows='1' name = 'pubcomment'></textarea><button class='btn btn-default' type='submit' name = 'pubsubmit' value = 'comment'>Submit</button></form>";
+    echo '<hr><h4>Send a Private Message</h4>';
+	echo "<form method = 'post' action = 'viewpost.php?allposts=1&item_id=" . $array ['item_id'] . "'><textarea class='form-control' rows='1' name = 'privcomment'></textarea><button class='btn btn-default' id = 'pubsubmit' type='submit' name = 'privsubmit' value = 'privcomment'>Send</button></form>";
+//}
+
+if (isset ( $_GET ['myposts'] ) && $_GET ['myposts'] == 1) {
+	echo "<form method = 'post' action = 'viewpost.php?myposts=1&item_id=" . $array ['item_id'] . "'><textarea class='form-control' rows='1' name = 'pubcomment'></textarea><button class='btn btn-default' type='submit' name = 'pubsubmit' value = 'comment'>Submit</button</form>";
+}
 //onClick='updateComments(".$array['item_id'].")'
 
 ?> 

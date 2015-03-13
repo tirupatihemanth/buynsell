@@ -72,36 +72,45 @@ $connectionObject->close();
 <title>Update Profile | BUYNSELL@IITM</title>
 </head>
 <body>
-	<div class="col-xs-8 col-xs-offset-2">
-		<h1>Update Your profile So that other people who buy your products can
-			easily reach you</h1>
+	<div class="container col-xs-10 col-xs-offset-1">
+		<div class='alert alert-warning col-xs-10 col-xs-offset-1'><p>Update Your profile So that other people who buy your products can
+			easily reach you</p></div>
     <?php
 				if (isset ( $_GET ['firsttime'] ) && $_GET ['firsttime'] == 1) {
-						echo "<span style = 'color:green'><b> Seems Like You Are logging in for the first time BUYNSELL@IITM WELCOMES YOU :)<br />Please Update Your profile So that other people can know more about you<br /></b></span>";
+						echo "<div class='alert alert-warning'><b> Seems Like You Are logging in for the first time BUYNSELL@IITM WELCOMES YOU :)<br />Please Update Your profile So that other people can know more about you<br /></b></div>";
 				}
 				?>
+        <div class='col-xs-10 col-xs-offset-1'>
     <form method="post" action="updateprofile.php">
-      
-	<?php echo "<p>Enter Your Full Name: <input type = 'text' value = '".$html_auto_fill[0]."' name = 'fullname'></input></p>"; ?>
-	
-	<?php echo "<p>HOSTEL: <input type = 'text' value = '".$html_auto_fill[1]."' name = 'hostel'></input></p>"; ?>
-	
-	<?php echo "<p> Room No.: <input type = 'number' value = '".$html_auto_fill[2]."' name = 'roomno'></input></p>"; ?>
-	
-	<?php echo "<p>Email Id: <input type = 'email' value = '".$html_auto_fill[3]."' name = 'emailid'></input></p>"; ?>
-	
-	<?php echo "<p>Phone No.: <input type = 'number' value = '".$html_auto_fill[4]."' name = 'phoneno'></input></p>"; ?>
-    
-        <input type="submit" value="Update Profile" name="updateprofile"></input>
-
-		</form>
+        <div class="form-group">
+            <label for="Input1">Enter your full name:</label>
+            <input type="text" class="form-control" value = '<?php echo $html_auto_fill[0] ?>' name='fullname' id="Input1" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="Input2">Enter your hostel name:</label>
+            <input type="text" class="form-control" value = '<?php echo $html_auto_fill[1] ?>' name='hostel' id="Input2" placeholder="Enter hostel">
+        </div>
+        <div class="form-group">
+            <label for="Input3">Enter your room no:</label>
+            <input type="number" class="form-control" value = '<?php echo $html_auto_fill[2] ?>' name='roomno' id="Input3" placeholder="Enter room no">
+        </div>
+        <div class="form-group">
+            <label for="Input4">Enter your email id:</label>
+            <input type="text" class="form-control" value = '<?php echo $html_auto_fill[3] ?>' name='emailid' id="Input4" placeholder="Enter email ID">
+        </div>
+        <div class="form-group">
+            <label for="Input5">Enter your phone number:</label>
+            <input type="text" class="form-control" value = '<?php echo $html_auto_fill[4] ?>' name='phoneno' id="Input5" placeholder="Enter phone no">
+        </div>
+	    <button type="submit" class="btn btn-default" value="Update Profile" name="updateprofile">Submit</button>
+		</form><br></div>
     
     <?php
 				if ($profileupdate == 1)
-					echo "<span style = 'color:green'> Your profile update is successful :)</span><br />";
+					echo "<br><br><div class='col-xs-10 col-xs-offset-1 alert alert-success'> Your profile update was successful.</div><br />";
 				?>
     
-<!--     <form method="post" action="updateprofile.php"> -->
+<!--     <form method="post" action="updateprofile.php"> 
 			<p style='color: red'>
 <!-- 				<b><em>You May Change Your Password here: </b></em><br /> -->
 <!-- 			</p> -->

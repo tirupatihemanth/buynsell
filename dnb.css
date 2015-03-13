@@ -114,3 +114,20 @@ margin-top: -5px;
 .ad{
 margin-top: 5px;
 }
+
+.container{
+    box-shadow: 0px -2px 4px #aaa,-2px -2px 4px #aaa;
+    background-color: #fff;
+    min-height: 100%;
+}
+
+body{
+    background-color: rgba(230, 126, 34, 0.1);
+}
+.comments{
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+textarea{
+resize: none;
+}
