@@ -23,7 +23,7 @@
 <html>
 	<body>
         <div class='container col-xs-10 col-xs-offset-1'>
-		<br /><br /><br /><br />
+		<br /><br />
 		
             <div class='col-xs-10 col-xs-offset-1'>
                 <div class='jumbotron'><h4>Hi,</h4><h3><small> We at WebOps are really enthusiastic to listen to your suggestions to make this site better. And we would be really happy if you could take some time off to give us your feedback below</small><br></h3></div>
