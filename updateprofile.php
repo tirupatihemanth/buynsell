@@ -77,7 +77,6 @@ $connectionObject->close();
 			easily reach you</p></div>
     <?php
 				if (isset ( $_GET ['firsttime'] ) && $_GET ['firsttime'] == 1) {
-						echo "<div class='alert alert-warning'><b> Seems Like You Are logging in for the first time BUYNSELL@IITM WELCOMES YOU :)<br />Please Update Your profile So that other people can know more about you<br /></b></div>";
 				}
 				?>
         <div class='col-xs-10 col-xs-offset-1'>
