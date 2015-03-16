@@ -1,6 +1,9 @@
 <?php
-session_start ();
+
+session_start();
 require_once "functions.php";
+$_SESSION['user_rollno'] = "CS13B027";
+redirectTo( "afterlogin.php" );
 require 'oauth/oauth_config.php';
 require 'oauth/oauth.php';
 $oauth = new OAuth ();
@@ -11,7 +14,7 @@ if ($oauth->authCode) {
 if ($oauth->user ['loggedIn']) {
 	$_SESSION ['user_rollno'] = $oauth->user ['username'];
 	$connectionObject = getConnection ();
-	$resultObject = queryDB ( $connectionObject, "SELECT rollno FROM userinfo where rollno = '{$_SESSION['user_rollno']}'" );
+	$resultObject = queryDB ( $connectionObject, "SELECT rollno FROM userinfo where rollno = '{$_SESSION['user_rollno']}' ");
 	
 	if (! $resultObject->num_rows) {
 		queryDB ( $connectionObject, "INSERT INTO userinfo (rollno, count) VALUES ('{$_SESSION['user_rollno']}',1)" );

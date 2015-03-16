@@ -6,6 +6,7 @@
 	sessionCheck();
 	
 	$connectionObject = getConnection();
+	
 
 	include "dnb.html";
 	if(isset($_GET['item_id'])){
@@ -13,9 +14,9 @@
 		$resultObject = queryDB($connectionObject, "SELECT items.*, userinfo.fullname FROM items,userinfo WHERE items.user_id = userinfo.id AND items.item_id = '{$_GET['item_id']}'");
 		$tagIdObject = queryDB($connectionObject, "SELECT tags.* FROM item_tags,tags where item_id = '{$_GET['item_id']}' AND tags.tag_id = item_tags.tag_id");
 		$product = $resultObject->fetch_array(MYSQL_BOTH);
-		
-
-		/*echo "<h3>Images</h3>";
+									 
+/*
+		echo "<h3>Images</h3>";
 		for($i=0;$i<2;$i++){
 			$src = "photos_items/".$product['item_id'].$i;
 			if(file_exists($src.".jpeg")){
@@ -77,11 +78,14 @@
                 }
                 else if(file_exists($src.".png")){
                     echo "<a href='".$src.".png'><img src=".$src.".png class='col-xs-8'/></a>";
-            }
+            	}
+            	else{
+            		echo "<a 'src=photos_items/noImage.jpg' class='col-xs-8'></a>";
+            	}
         ?>
         <div class='col-xs-4'>
             <?php
-                for($i=0;$i<3;$i++){
+                for($i=1;$i<3;$i++){
                 $src = "photos_items/".$product['item_id'].$i;
                 if(file_exists($src.".jpeg")){
                     echo "<a href='".$src.".jpeg'><img src=".$src.".jpeg class='col-xs-12'/></a>";
@@ -133,6 +137,24 @@
 		$array['item_id'] = $_GET['item_id'];
 		include "comments.php";
         ?>
+        
         </div>
     </div>
+    <?php 
+    		echo "<form method = 'post' action = 'viewpost.php?myposts=1&item_id='".$_GET['item_id'].">
+				<p> If your product is sold or if you want to remove it from adds you chech the below checkbox</p><br />
+				<input type='checkbox' name='sold' value='sold'>Remove My Add</input>
+				<input type='submit' name='soldSubmit' value='Submit'></input>
+			</form>";
+    		
+    		
+    		if(isset($_GET['myposts']) && isset($_POST['soldSubmit'])){
+    			queryDB($connectionObject, "UPDATE items SET items.show = '0' WHERE item_id = '{$_GET['item_id']}'");
+    			echo "This post will not be visible from now in all posts";
+    		}
+    		
+    		
+    		?>
+    		
+    
 </div>

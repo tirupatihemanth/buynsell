@@ -11,9 +11,27 @@ include "dnb.html";
 $connectionObject = getConnection ();
 if (isset ( $_POST ['post'] )) {
 	// print_r($_POST['category']);
-	$error = 0;
+	$errorFile = 0;
+	$errorName = 0;
+	$errorPrice = 0;
+	$errorReason = 0;
+	$errorDescription = 0;
+	
 	include "upload_file.php";
-	if ($error == 0) {
+	if(strlen($_POST['item_name']) == 0 || strlen($_POST['item_name'])>50){
+		$errorName = 1;
+	}
+	if($_POST['price'] <=0 || $_POST['price']>1000000){
+		$errorPrice = 1;
+	}
+	if(strlen($_POST['description']) == 0 || strlen($_POST['description'] > 1000)){
+		$errorDescription = 1;
+	}
+	if(strlen($_POST['reason']) == 0 || strlen($_POST['description']) > 1000){
+		$errorReason = 1;
+	}
+	
+	if ($errorFile || $errorName || $errorPrice || $errorDescription || $errorReason == 0){
 		
 		queryDB ( $connectionObject, "INSERT INTO items(item_name,price,description,reason,user_id) VALUE('{$_POST['item_name']}', '{$_POST['price']}', '{$_POST['description']}', '{$_POST['reason']}','{$_SESSION['user_id']}')" );
 		
@@ -25,6 +43,7 @@ if (isset ( $_POST ['post'] )) {
 		for($i=0;$i<sizeof($_FILES["photos"]["name"]);$i++){
 			$ext = end((explode("/", $_FILES["photos"]["type"][$i])));
 			move_uploaded_file($_FILES["photos"]["tmp_name"][$i],"photos_items/".$item_id.$i.".".$ext);
+		
 		}
 		//print_r($_POST['category']);
 		echo "<br />";
@@ -51,10 +70,32 @@ if (isset ( $_POST ['post'] )) {
 			}
 			
 		}
+		
+		echo "<div class='alert alert-success'><b><br /><br /><br /><br />Your posts has been successfully posted. Check My posts or All posts to have a look at it</b></div>";
 	}
 	
-	if ($error == 0){
-		echo "<div class='alert alert-success'><b><br /><br /><br /><br />Your posts has been successfully posted. Check My posts or All posts to have a look at it</b></div>";
+	else{
+		
+		if($errorFile == 1){
+			echo "Error File Upload<br />";
+		}
+		
+		if($errorName == 1){
+			echo "Please fill in a valid Item Name(<50 Characters)<br />";
+		}
+		
+		if($errorReason == 1){
+			echo "Reason field cannot be empty<br />";
+		}
+		
+		if($errorPrice == 1){
+			echo "Please enter valid price of the object<br />";
+		}
+		
+		if($errorDescription == 1){
+			echo "Please enter valid Description <br />";
+		}
+			
 	}
 	$connectionObject->close ();
 }
@@ -95,11 +136,11 @@ if (isset ( $_POST ['post'] )) {
 				<label for="InputCategory">Choose Category</label>
 				<select class="form-control" name="category[]" id="sel1" multiple>
 								<option value="academics"> Academics </option>
-								<option value="coupons">Coupons</option>
+								<option value="fccoupons">Coupons</option>
 								<option value="electronics">Electronics</option>
 								<option value="laptops">Laptops</option>
 								<option value="mobiles">Mobiles</option>
-								<option value="stationery">Stationery</option>
+								<option value="accessories">Stationery</option>
 								<option value="others">Clothing</option>
 								<option value="academics">Books</option>
 								<option value="cycles">Cycles</option>

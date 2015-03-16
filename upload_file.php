@@ -11,14 +11,14 @@
 				if($_FILES["photos"]["size"][$j]<10000000)
 					break;
 				else{
-					$error = 1;
+					$errorFile = 1;
 					echo "<span style = color:red>make sure the size of the pic is less than 10MB</span>";
 					break;
 				}
 				break;
 			}
 			else if($i == 3){
-				$error = 1;
+				$errorFile = 1;
 				echo "<span style = color:red>The photo numbered ".$j."you have uploaded must of the file type 'gif', 'jpeg','jpg','png'</span>";
 			}
 				

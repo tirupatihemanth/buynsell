@@ -1,6 +1,5 @@
 <?php
 @session_start();
-
 require 'config/OAuth_config.php';
 require 'libs/OAuth.php';
 
